@@ -15,12 +15,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Mirror;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -31,7 +35,7 @@ public class BlockLowVoltageConduit extends BlockTEBase{
     
     public EnumBlockRenderType getRenderType(IBlockState state)
     {
-        return EnumBlockRenderType.INVISIBLE;
+        return EnumBlockRenderType.MODEL;
     }
 	
     public static final PropertyBool UP = PropertyBool.create("up");
@@ -40,11 +44,6 @@ public class BlockLowVoltageConduit extends BlockTEBase{
     public static final PropertyBool EAST = PropertyBool.create("east");
     public static final PropertyBool SOUTH = PropertyBool.create("south");
     public static final PropertyBool WEST = PropertyBool.create("west");
-
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this, new IProperty[] {UP, DOWN, NORTH, EAST, WEST, SOUTH});
-    }
 
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos){
@@ -131,18 +130,59 @@ public class BlockLowVoltageConduit extends BlockTEBase{
         return 0;
     }
 
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-    {
-        return state.withProperty(UP, Boolean.valueOf(this.canConnectTo(worldIn, pos.up()))).withProperty(DOWN, Boolean.valueOf(this.canConnectTo(worldIn, pos.down()))).withProperty(NORTH, Boolean.valueOf(this.canConnectTo(worldIn, pos.north()))).withProperty(EAST, Boolean.valueOf(this.canConnectTo(worldIn, pos.east()))).withProperty(SOUTH, Boolean.valueOf(this.canConnectTo(worldIn, pos.south()))).withProperty(WEST, Boolean.valueOf(this.canConnectTo(worldIn, pos.west())));
+    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+        return state
+        		.withProperty(NORTH, Boolean.valueOf(this.canConnectTo(worldIn, pos.north(), EnumFacing.NORTH)))
+        		.withProperty(SOUTH, Boolean.valueOf(this.canConnectTo(worldIn, pos.south(), EnumFacing.SOUTH)))
+                .withProperty(WEST,  Boolean.valueOf(this.canConnectTo(worldIn, pos.west(), EnumFacing.WEST)))
+                .withProperty(EAST,  Boolean.valueOf(this.canConnectTo(worldIn, pos.east(), EnumFacing.EAST)))
+                .withProperty(UP,  Boolean.valueOf(this.canConnectTo(worldIn, pos.up(), EnumFacing.UP)))
+                .withProperty(DOWN,  Boolean.valueOf(this.canConnectTo(worldIn, pos.down(), EnumFacing.DOWN)));
     }
     
-    public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos)
+    public IBlockState withRotation(IBlockState state, Rotation rot)
+    {
+        switch (rot)
+        {
+            case CLOCKWISE_180:
+                return state.withProperty(NORTH, state.getValue(SOUTH)).withProperty(EAST, state.getValue(WEST)).withProperty(SOUTH, state.getValue(NORTH)).withProperty(WEST, state.getValue(EAST));
+            case COUNTERCLOCKWISE_90:
+                return state.withProperty(NORTH, state.getValue(EAST)).withProperty(EAST, state.getValue(SOUTH)).withProperty(SOUTH, state.getValue(WEST)).withProperty(WEST, state.getValue(NORTH));
+            case CLOCKWISE_90:
+                return state.withProperty(NORTH, state.getValue(WEST)).withProperty(EAST, state.getValue(NORTH)).withProperty(SOUTH, state.getValue(EAST)).withProperty(WEST, state.getValue(SOUTH));
+            default:
+                return state;
+        }
+    }
+    
+    public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
+    {
+        switch (mirrorIn)
+        {
+            case LEFT_RIGHT:
+                return state.withProperty(NORTH, state.getValue(SOUTH)).withProperty(SOUTH, state.getValue(NORTH));
+            case FRONT_BACK:
+                return state.withProperty(EAST, state.getValue(WEST)).withProperty(WEST, state.getValue(EAST));
+            default:
+                return super.withMirror(state, mirrorIn);
+        }
+    }
+    
+    public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing direction)
     {
         TileEntity te = worldIn.getTileEntity(pos);
-        return ((te instanceof TileEntity) && te.hasCapability(EnergyCapabilityProvider.energyCapability, null));
+        if (te == null) {
+        	return false;
+        }
+        return (te instanceof TileEntityLowVoltageConduit) || (te.hasCapability(EnergyCapabilityProvider.energyCapability, direction.getOpposite()));
     }
     
     public TileEntity createNewTileEntity(World worldIn, int meta) {
     	return new TileEntityLowVoltageConduit();
+    }
+    
+    protected BlockStateContainer createBlockState()
+    {
+        return new BlockStateContainer(this, new IProperty[] {UP, DOWN, NORTH, EAST, WEST, SOUTH});
     }
 }

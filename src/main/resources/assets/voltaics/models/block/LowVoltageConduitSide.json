@@ -1,0 +1,18 @@
+{
+    "textures": {
+        "particle": "voltaics:blocks/lowVoltageConduitTex"
+    },
+    "elements": [
+        {   "from": [ 6, 6, 0 ],
+            "to": [ 10, 10, 6 ],
+            "faces": {
+                "down":  {"texture": "voltaics:blocks/lowVoltageConduitTex" },
+                "up":    {"texture": "voltaics:blocks/lowVoltageConduitTex" },
+                "north": {"texture": "voltaics:blocks/lowVoltageConduitTex", "cullface": "north" },
+                "west":  {"texture": "voltaics:blocks/lowVoltageConduitTex" },
+                "east":  {"texture": "voltaics:blocks/lowVoltageConduitTex" }
+            },
+            "__comment": "top bar"
+        }
+    ]
+}

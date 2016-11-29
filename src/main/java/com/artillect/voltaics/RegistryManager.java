@@ -52,16 +52,6 @@ public class RegistryManager {
 
 	}
 	
-    @SideOnly(Side.CLIENT)
-    public static void initModels() {
-        ((IModeledBlock) lowVoltageConduit).initModel();
-    }
-
-    @SideOnly(Side.CLIENT)
-    public static void initItemModels() {
-        ((BlockLowVoltageConduit) lowVoltageConduit).initItemModel();
-    }
-	
 	@SideOnly(Side.CLIENT)
     public static void registerRendering(){
 
