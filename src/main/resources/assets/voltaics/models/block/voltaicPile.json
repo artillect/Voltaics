@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "voltaics:blocks/voltaicPileSide",
+    "down": "voltaics:blocks/voltaicPileTop",
+    "up": "voltaics:blocks/voltaicPileTop",
+    "east": "voltaics:blocks/voltaicPileSide",
+    "west": "voltaics:blocks/voltaicPileSide",
+    "north": "voltaics:blocks/voltaicPileTop",
+    "south": "voltaics:blocks/voltaicPileSide"
+  }
+}
