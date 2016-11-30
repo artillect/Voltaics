@@ -104,14 +104,7 @@ public class TileEntityVoltaicPile extends TileEntity implements ITileEntityBase
 
 	@Override
 	public void update() {
-		// This is for testing purposes, remove once power system is implemented
-		if (this.capability.getEnergy() - 1000 > 0) {
-			double energy = this.capability.getEnergy() - 10;
-			this.capability.setEnergy(energy);
-		}
-		else {
-			this.capability.setEnergy(0);
-		}
+		
 	}
 
 }

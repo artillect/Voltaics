@@ -28,7 +28,7 @@ import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockLowVoltageConduit extends BlockTEBase{
+public class BlockLowVoltageConduit extends BlockTEBase implements IModeledBlock{
 	public BlockLowVoltageConduit(Material material, String name, boolean addToTab) {
 		super(material, name, addToTab);
 	}
@@ -138,34 +138,6 @@ public class BlockLowVoltageConduit extends BlockTEBase{
                 .withProperty(EAST,  Boolean.valueOf(this.canConnectTo(worldIn, pos.east(), EnumFacing.EAST)))
                 .withProperty(UP,  Boolean.valueOf(this.canConnectTo(worldIn, pos.up(), EnumFacing.UP)))
                 .withProperty(DOWN,  Boolean.valueOf(this.canConnectTo(worldIn, pos.down(), EnumFacing.DOWN)));
-    }
-    
-    public IBlockState withRotation(IBlockState state, Rotation rot)
-    {
-        switch (rot)
-        {
-            case CLOCKWISE_180:
-                return state.withProperty(NORTH, state.getValue(SOUTH)).withProperty(EAST, state.getValue(WEST)).withProperty(SOUTH, state.getValue(NORTH)).withProperty(WEST, state.getValue(EAST));
-            case COUNTERCLOCKWISE_90:
-                return state.withProperty(NORTH, state.getValue(EAST)).withProperty(EAST, state.getValue(SOUTH)).withProperty(SOUTH, state.getValue(WEST)).withProperty(WEST, state.getValue(NORTH));
-            case CLOCKWISE_90:
-                return state.withProperty(NORTH, state.getValue(WEST)).withProperty(EAST, state.getValue(NORTH)).withProperty(SOUTH, state.getValue(EAST)).withProperty(WEST, state.getValue(SOUTH));
-            default:
-                return state;
-        }
-    }
-    
-    public IBlockState withMirror(IBlockState state, Mirror mirrorIn)
-    {
-        switch (mirrorIn)
-        {
-            case LEFT_RIGHT:
-                return state.withProperty(NORTH, state.getValue(SOUTH)).withProperty(SOUTH, state.getValue(NORTH));
-            case FRONT_BACK:
-                return state.withProperty(EAST, state.getValue(WEST)).withProperty(WEST, state.getValue(EAST));
-            default:
-                return super.withMirror(state, mirrorIn);
-        }
     }
     
     public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing direction)
