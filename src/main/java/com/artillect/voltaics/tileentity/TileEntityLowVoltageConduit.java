@@ -167,16 +167,16 @@ public class TileEntityLowVoltageConduit extends TileEntity implements ITileEnti
 		if (connectedFaces.size() > 0)
 			for (int i = 0; i < connectedFaces.size(); i++) {
 				TileEntity te = (getWorld().getTileEntity(getPos().offset(connectedFaces.get(i))));
-				if (capability.getEnergy() <= 100) {
-					if ((te != null) && te.hasCapability(EnergyCapabilityProvider.energyCapability, null)) {
+				if (capability.getEnergy() < capability.getEnergyCapacity()) {
+					if ((te != null) && te.hasCapability(EnergyCapabilityProvider.energyCapability, null) && !(te instanceof TileEntityInductor)) {
 						IEnergyCapability cap = te.getCapability(EnergyCapabilityProvider.energyCapability, null);
-						if ((cap.getEnergy() < capability.getEnergyCapacity()-capability.getEnergy()) && cap.getEnergy() > 0) {
+						if (cap.getEnergy() > 0) {
 							int removed = cap.removeAmount(10, true);
 							int added = capability.addAmount(removed, true);
 						}
 					}
 				}
-				if (capability.getEnergy() > 100) {
+				if (capability.getEnergy() > 0) {
 					if ((te != null) && te.hasCapability(EnergyCapabilityProvider.energyCapability, null)) {
 						IEnergyCapability cap = te.getCapability(EnergyCapabilityProvider.energyCapability, null);
 						if (cap.getEnergy() < cap.getEnergyCapacity() && capability.getEnergy() > 0) {
