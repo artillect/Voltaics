@@ -1,19 +1,19 @@
 {
     "textures": {
-        "particle": "voltaics:blocks/lowVoltageConduitTex"
+        "particle": "voltaics:blocks/lowVoltageConduit",
+        "0":"voltaics:blocks/lowVoltageConduit"
     },
     "elements": [
         {   "from": [ 6, 6, 6 ],
             "to": [ 10, 10, 10 ],
             "faces": {
-                "down":  { "uv": [ 12, 12, 16, 16 ], "texture": "voltaics:blocks/lowVoltageConduitTex", "cullface": "down" },
-                "up":    { "uv": [ 12, 12, 16, 16 ], "texture": "voltaics:blocks/lowVoltageConduitTex", "cullface": "up"   },
-                "north": { "uv": [ 12, 12, 16, 16 ], "texture": "voltaics:blocks/lowVoltageConduitTex" },
-                "south": { "uv": [ 12, 12, 16, 16 ], "texture": "voltaics:blocks/lowVoltageConduitTex" },
-                "west":  { "uv": [ 12, 12, 16, 16 ], "texture": "voltaics:blocks/lowVoltageConduitTex" },
-                "east":  { "uv": [ 12, 12, 16, 16 ], "texture": "voltaics:blocks/lowVoltageConduitTex" }
-            },
-            "__comment": "Center post"
+                "down":  { "texture": "#0"},
+                "up":    { "texture": "#0"},
+                "north": { "texture": "#0" },
+                "south": { "texture": "#0" },
+                "west":  { "texture": "#0" },
+                "east":  { "texture": "#0" }
+            }
         }
     ]
 }

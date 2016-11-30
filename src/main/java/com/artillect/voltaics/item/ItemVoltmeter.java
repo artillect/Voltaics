@@ -30,9 +30,11 @@ public class ItemVoltmeter extends ItemBase {
 		IEnergyCapability energyBuffer = te.getCapability(EnergyCapabilityProvider.energyCapability, facing);
 		
 		double storedEnergy = energyBuffer.getEnergy();
+		double maxStoredEnergy = energyBuffer.getEnergyCapacity();
+		energyBuffer.removeAmount(1, true);
 		
 		playerIn.addChatMessage(new TextComponentString("Stored Energy: "+storedEnergy+" J"));
-		  
+		playerIn.addChatMessage(new TextComponentString("Max Energy Storage: "+maxStoredEnergy+" J"));
 		return EnumActionResult.SUCCESS;
 	}
 }

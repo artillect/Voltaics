@@ -5,32 +5,32 @@ import com.artillect.voltaics.Voltaics;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class DefaultEnergyCapability implements IEnergyCapability {
-	private double energy = 0;
-	private double capacity = 0;
+	private int energy = 0;
+	private int capacity = 0;
 	@Override
-	public double getEnergy() {
+	public int getEnergy() {
 		return energy;
 	}
 
 	@Override
-	public double getEnergyCapacity() {
+	public int getEnergyCapacity() {
 		return capacity;
 	}
 
 	@Override
-	public void setEnergy(double value) {
+	public void setEnergy(int value) {
 		energy = value;
 	}
 
 	@Override
-	public void setEnergyCapacity(double value) {
+	public void setEnergyCapacity(int value) {
 		capacity = value;
 	}
 
 	@Override
-	public double addAmount(double value, boolean doAdd) {
+	public int addAmount(int value, boolean doAdd) {
 		if (energy+value > capacity){
-			double added = capacity-energy;
+			int added = capacity-energy;
 			if (doAdd){
 				energy = capacity;
 			}
@@ -43,9 +43,9 @@ public class DefaultEnergyCapability implements IEnergyCapability {
 	}
 
 	@Override
-	public double removeAmount(double value, boolean doRemove) {
+	public int removeAmount(int value, boolean doRemove) {
 		if (energy-value < 0){
-			double removed = energy;
+			int removed = energy;
 			if (doRemove){
 				energy = 0;
 			}
@@ -66,10 +66,10 @@ public class DefaultEnergyCapability implements IEnergyCapability {
 	@Override
 	public void readFromNBT(NBTTagCompound tag) {
 		if (tag.hasKey(Voltaics.modId+":energy")){
-			energy = tag.getDouble(Voltaics.modId+":energy");
+			energy = (int) tag.getDouble(Voltaics.modId+":energy");
 		}
 		if (tag.hasKey(Voltaics.modId+":energyCapacity")){
-			capacity = tag.getDouble(Voltaics.modId+":energyCapacity");
+			capacity = (int) tag.getDouble(Voltaics.modId+":energyCapacity");
 		}
 	}
 }
