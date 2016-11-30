@@ -11,6 +11,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -102,6 +103,28 @@ public class BlockLowVoltageConduit extends BlockTEBase implements IModeledBlock
 		}
 	}*/
    
+
+
+	public void onBlockPlaced(World world, BlockPos pos, IBlockState state, EntityPlayer player){
+		if (world.getTileEntity(pos.up()) instanceof TileEntityLowVoltageConduit){
+			((TileEntityLowVoltageConduit)world.getTileEntity(pos.up())).updateNeighbors(world);
+		}
+		if (world.getTileEntity(pos.down()) instanceof TileEntityLowVoltageConduit){
+			((TileEntityLowVoltageConduit)world.getTileEntity(pos.down())).updateNeighbors(world);
+		}
+		if (world.getTileEntity(pos.north()) instanceof TileEntityLowVoltageConduit){
+			((TileEntityLowVoltageConduit)world.getTileEntity(pos.north())).updateNeighbors(world);
+		}
+		if (world.getTileEntity(pos.south()) instanceof TileEntityLowVoltageConduit){
+			((TileEntityLowVoltageConduit)world.getTileEntity(pos.south())).updateNeighbors(world);
+		}
+		if (world.getTileEntity(pos.west()) instanceof TileEntityLowVoltageConduit){
+			((TileEntityLowVoltageConduit)world.getTileEntity(pos.west())).updateNeighbors(world);
+		}
+		if (world.getTileEntity(pos.east()) instanceof TileEntityLowVoltageConduit){
+			((TileEntityLowVoltageConduit)world.getTileEntity(pos.east())).updateNeighbors(world);
+		}
+	}
 	
 	@Override
 	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player){
