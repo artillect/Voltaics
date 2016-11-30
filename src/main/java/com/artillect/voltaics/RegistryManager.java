@@ -16,8 +16,11 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import com.artillect.voltaics.tileentity.TileEntityInductor;
 import com.artillect.voltaics.tileentity.TileEntityLowVoltageConduit;
 import com.artillect.voltaics.tileentity.TileEntityVoltaicPile;
+import com.artillect.voltaics.block.BlockInductor;
 import com.artillect.voltaics.block.BlockLowVoltageConduit;
 import com.artillect.voltaics.block.BlockVoltaicPile;
 
@@ -26,7 +29,7 @@ public class RegistryManager {
 	public static ArrayList<Item> items = new ArrayList<Item>();
 
 	public static Item voltmeter, ingotCopper, hammer;
-	public static Block voltaicPile, lowVoltageConduit;
+	public static Block voltaicPile, lowVoltageConduit, inductor;
 	
 	public static void registerAll(){
 		//blocks.add(blockCaminiteLargeBrick = (new BlockBase(Material.ROCK,"blockCaminiteLargeBrick",true)).setHarvestProperties("pickaxe", 0).setHardness(1.6f));
@@ -44,8 +47,10 @@ public class RegistryManager {
 		
 		blocks.add(voltaicPile = (new BlockVoltaicPile(Material.ROCK,"voltaicPile",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.4f));
 		blocks.add(lowVoltageConduit = (new BlockLowVoltageConduit(Material.ROCK,"lowVoltageConduit",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.0f));
+		blocks.add(inductor = (new BlockInductor(Material.ROCK,"inductor",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.4f));
 		GameRegistry.registerTileEntity(TileEntityVoltaicPile.class, Voltaics.modId+":tileEntityVoltaicPile");
 		GameRegistry.registerTileEntity(TileEntityLowVoltageConduit.class, Voltaics.modId+":tileEntityLowVoltageConduit");
+		GameRegistry.registerTileEntity(TileEntityInductor.class, Voltaics.modId+":tileEntityInductor");
 	}
 	
 	public static void registerFluids(){
