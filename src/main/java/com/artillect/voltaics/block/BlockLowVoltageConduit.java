@@ -1,6 +1,6 @@
 package com.artillect.voltaics.block;
 
-import com.artillect.voltaics.capability.JouleCapabilities;
+import com.artillect.voltaics.capability.EnergyCapabilities;
 import com.artillect.voltaics.tileentity.TileEntityLowVoltageConduit;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -156,7 +156,7 @@ public class BlockLowVoltageConduit extends BlockTEBase implements IModeledBlock
         if (te == null) {
         	return false;
         }
-        return (te instanceof TileEntityLowVoltageConduit) || (te.hasCapability(JouleCapabilities.CAPABILITY_HOLDER, direction.getOpposite()));
+        return (te instanceof TileEntityLowVoltageConduit) || (te.hasCapability(EnergyCapabilities.CAPABILITY_HOLDER, direction.getOpposite()));
     }
     
     public TileEntity createNewTileEntity(World worldIn, int meta) {

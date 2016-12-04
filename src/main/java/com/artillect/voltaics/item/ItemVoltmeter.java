@@ -1,7 +1,7 @@
 package com.artillect.voltaics.item;
 
-import com.artillect.voltaics.capability.JouleCapabilities;
-import com.artillect.voltaics.power.IJouleHolder;
+import com.artillect.voltaics.capability.EnergyCapabilities;
+import com.artillect.voltaics.power.IEnergyHolder;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -25,14 +25,14 @@ public class ItemVoltmeter extends ItemBase {
 		TileEntity te = worldIn.getTileEntity(pos);
 		if (te == null) return EnumActionResult.FAIL;
 
-		if (!te.hasCapability(JouleCapabilities.CAPABILITY_HOLDER, facing)) return EnumActionResult.FAIL;
+		if (!te.hasCapability(EnergyCapabilities.CAPABILITY_HOLDER, facing)) return EnumActionResult.FAIL;
 
-		IJouleHolder energyBuffer = te.getCapability(JouleCapabilities.CAPABILITY_HOLDER, facing);
+		IEnergyHolder energyBuffer = te.getCapability(EnergyCapabilities.CAPABILITY_HOLDER, facing);
 		
 		double storedEnergy = energyBuffer.getStoredPower();
 		double maxStoredEnergy = energyBuffer.getCapacity();		
-		playerIn.addChatMessage(new TextComponentString("Stored Energy: "+storedEnergy+" J"));
-		playerIn.addChatMessage(new TextComponentString("Max Energy Storage: "+maxStoredEnergy+" J"));
+		playerIn.addChatMessage(new TextComponentString("Stored Energy: "+storedEnergy+" Therms"));
+		playerIn.addChatMessage(new TextComponentString("Max Energy Storage: "+maxStoredEnergy+" Therms"));
 		return EnumActionResult.SUCCESS;
 	}
 }

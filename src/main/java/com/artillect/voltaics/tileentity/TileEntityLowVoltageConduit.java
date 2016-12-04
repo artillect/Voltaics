@@ -1,9 +1,9 @@
 package com.artillect.voltaics.tileentity;
 
 import javax.annotation.Nullable;
-import com.artillect.voltaics.capability.JouleCapabilities;
+import com.artillect.voltaics.capability.EnergyCapabilities;
 import com.artillect.voltaics.lib.JouleUtils;
-import com.artillect.voltaics.power.implementation.BaseJouleContainer;
+import com.artillect.voltaics.power.implementation.BaseEnergyContainer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
@@ -15,10 +15,10 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.common.capabilities.Capability;
 
 public class TileEntityLowVoltageConduit extends TileEntity implements ITickable {
-	private BaseJouleContainer container;
+	private BaseEnergyContainer container;
 	
 	public TileEntityLowVoltageConduit() {
-		this.container = new BaseJouleContainer(0, 250, 50, 50);
+		this.container = new BaseEnergyContainer(0, 250, 50, 50);
 	}
 	
 	public static enum EnumConduitConnection{
@@ -44,7 +44,7 @@ public class TileEntityLowVoltageConduit extends TileEntity implements ITickable
 			return EnumConduitConnection.CONDUIT;
 		}
 		else if (world.getTileEntity(pos) != null){
-			if (world.getTileEntity(pos).hasCapability(JouleCapabilities.CAPABILITY_HOLDER, side)){
+			if (world.getTileEntity(pos).hasCapability(EnergyCapabilities.CAPABILITY_HOLDER, side)){
 				return EnumConduitConnection.BLOCK;
 			}
 		}
@@ -74,7 +74,7 @@ public class TileEntityLowVoltageConduit extends TileEntity implements ITickable
 		south = connectionFromInt(compound.getInteger("south"));
 		west = connectionFromInt(compound.getInteger("west"));
 		east = connectionFromInt(compound.getInteger("east"));
-        this.container = new BaseJouleContainer(compound.getCompoundTag("JouleContainer"));
+        this.container = new BaseEnergyContainer(compound.getCompoundTag("JouleContainer"));
 	}
 	public void updateNeighbors(IBlockAccess world){
 		up = getConnection(world,getPos().up(),EnumFacing.DOWN);
@@ -105,7 +105,7 @@ public class TileEntityLowVoltageConduit extends TileEntity implements ITickable
     @SuppressWarnings("unchecked")
     public <T> T getCapability (Capability<T> capability, EnumFacing facing) {
  
-        if (capability == JouleCapabilities.CAPABILITY_CONSUMER || capability == JouleCapabilities.CAPABILITY_PRODUCER || capability == JouleCapabilities.CAPABILITY_HOLDER)
+        if (capability == EnergyCapabilities.CAPABILITY_CONSUMER || capability == EnergyCapabilities.CAPABILITY_PRODUCER || capability == EnergyCapabilities.CAPABILITY_HOLDER)
             return (T) this.container;
             
         return super.getCapability(capability, facing);
@@ -114,7 +114,7 @@ public class TileEntityLowVoltageConduit extends TileEntity implements ITickable
     @Override
     public boolean hasCapability (Capability<?> capability, EnumFacing facing) {
         
-        if (capability == JouleCapabilities.CAPABILITY_CONSUMER || capability == JouleCapabilities.CAPABILITY_PRODUCER || capability == JouleCapabilities.CAPABILITY_HOLDER)
+        if (capability == EnergyCapabilities.CAPABILITY_CONSUMER || capability == EnergyCapabilities.CAPABILITY_PRODUCER || capability == EnergyCapabilities.CAPABILITY_HOLDER)
             return true;
             
         return super.hasCapability(capability, facing);

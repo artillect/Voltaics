@@ -1,13 +1,13 @@
 package com.artillect.voltaics.power.implementation;
 
-import com.artillect.voltaics.power.IJouleConsumer;
-import com.artillect.voltaics.power.IJouleHolder;
-import com.artillect.voltaics.power.IJouleProducer;
+import com.artillect.voltaics.power.IEnergyConsumer;
+import com.artillect.voltaics.power.IEnergyHolder;
+import com.artillect.voltaics.power.IEnergyProducer;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
 
-public class BaseJouleMachine implements IJouleConsumer, IJouleHolder, INBTSerializable<NBTTagCompound> {
+public class BaseEnergyMachine implements IEnergyConsumer, IEnergyHolder, INBTSerializable<NBTTagCompound> {
     
     /**
      * The amount of stored Joule power.
@@ -34,7 +34,7 @@ public class BaseJouleMachine implements IJouleConsumer, IJouleHolder, INBTSeria
      * will not set the amount of stored power. These values are arbitrary and should not be
      * taken as a base line for balancing.
      */
-    public BaseJouleMachine() {
+    public BaseEnergyMachine() {
         
         this(5000, 50, 50);
     }
@@ -46,7 +46,7 @@ public class BaseJouleMachine implements IJouleConsumer, IJouleHolder, INBTSeria
      * @param input The maximum rate of power that can be accepted at a time.
      * @param output The maximum rate of power that can be extracted at a time.
      */
-    public BaseJouleMachine(long capacity, long input, long output) {
+    public BaseEnergyMachine(long capacity, long input, long output) {
         
         this(0, capacity, input, output);
     }
@@ -59,7 +59,7 @@ public class BaseJouleMachine implements IJouleConsumer, IJouleHolder, INBTSeria
      * @param input The maximum rate of power that can be accepted at a time.
      * @param output The maximum rate of power that can be extracted at a time.
      */
-    public BaseJouleMachine(long power, long capacity, long input, long output) {
+    public BaseEnergyMachine(long power, long capacity, long input, long output) {
         
         this.stored = power;
         this.capacity = capacity;
@@ -75,7 +75,7 @@ public class BaseJouleMachine implements IJouleConsumer, IJouleHolder, INBTSeria
      * 
      * @param dataTag The NBTCompoundTag to read the important data from.
      */
-    public BaseJouleMachine(NBTTagCompound dataTag) {
+    public BaseEnergyMachine(NBTTagCompound dataTag) {
         
         this.deserializeNBT(dataTag);
     }
@@ -141,7 +141,7 @@ public class BaseJouleMachine implements IJouleConsumer, IJouleHolder, INBTSeria
      * @param capacity The new capacity for the Machine.
      * @return The instance of the Machine being updated.
      */
-    public BaseJouleMachine setCapacity (long capacity) {
+    public BaseEnergyMachine setCapacity (long capacity) {
         
         this.capacity = capacity;
         
@@ -167,7 +167,7 @@ public class BaseJouleMachine implements IJouleConsumer, IJouleHolder, INBTSeria
      * @param rate The amount of Joule power to accept at a time.
      * @return The instance of the Machine being updated.
      */
-    public BaseJouleMachine setInputRate (long rate) {
+    public BaseEnergyMachine setInputRate (long rate) {
         
         this.inputRate = rate;
         return this;
@@ -189,7 +189,7 @@ public class BaseJouleMachine implements IJouleConsumer, IJouleHolder, INBTSeria
      * @param rate The amount of Joule power that can be extracted.
      * @return The instance of the Machine being updated.
      */
-    public BaseJouleMachine setOutputRate (long rate) {
+    public BaseEnergyMachine setOutputRate (long rate) {
         
         this.outputRate = rate;
         return this;
@@ -202,7 +202,7 @@ public class BaseJouleMachine implements IJouleConsumer, IJouleHolder, INBTSeria
      * @param rate The input/output rate for the Joule Machine.
      * @return The instance of the Machine being updated.
      */
-    public BaseJouleMachine setTransferRate (long rate) {
+    public BaseEnergyMachine setTransferRate (long rate) {
         
         this.setInputRate(rate);
         this.setOutputRate(rate);

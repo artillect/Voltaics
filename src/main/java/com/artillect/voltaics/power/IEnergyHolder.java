@@ -1,6 +1,6 @@
 package com.artillect.voltaics.power;
 
-public interface IJouleHolder {
+public interface IEnergyHolder {
     
     /**
      * Gets the amount of Tesla power stored being stored.
