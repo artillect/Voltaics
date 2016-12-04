@@ -39,12 +39,21 @@ public class MessageTEUpdate implements IMessage {
     	@SideOnly(Side.CLIENT)
         @Override
         public IMessage onMessage(final MessageTEUpdate message, final MessageContext ctx) {
+<<<<<<< HEAD
     		Minecraft.getMinecraft().addScheduledTask(()-> {
 	    		if ((Minecraft.getMinecraft().player.getEntityWorld()).getTileEntity(new BlockPos(message.tag.getInteger("x"),message.tag.getInteger("y"),message.tag.getInteger("z"))) != null){
 	    			Minecraft.getMinecraft().player.getEntityWorld().getTileEntity(new BlockPos(message.tag.getInteger("x"),message.tag.getInteger("y"),message.tag.getInteger("z"))).readFromNBT(message.tag);
 	    			Minecraft.getMinecraft().player.getEntityWorld().getTileEntity(new BlockPos(message.tag.getInteger("x"),message.tag.getInteger("y"),message.tag.getInteger("z"))).markDirty();
 	    		}
 	    	});
+=======
+//    		Minecraft.getMinecraft().addScheduledTask(()-> {
+//	    		if ((Minecraft.getMinecraft().thePlayer.getEntityWorld()).getTileEntity(new BlockPos(message.tag.getInteger("x"),message.tag.getInteger("y"),message.tag.getInteger("z"))) != null){
+//	    			Minecraft.getMinecraft().thePlayer.getEntityWorld().getTileEntity(new BlockPos(message.tag.getInteger("x"),message.tag.getInteger("y"),message.tag.getInteger("z"))).readFromNBT(message.tag);
+//	    			Minecraft.getMinecraft().thePlayer.getEntityWorld().getTileEntity(new BlockPos(message.tag.getInteger("x"),message.tag.getInteger("y"),message.tag.getInteger("z"))).markDirty();
+//	    		}
+//	    	});
+>>>>>>> 24f19b6... fixed copper ore
     		return null;
 	    }
     }
