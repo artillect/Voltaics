@@ -17,23 +17,23 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 
-import com.artillect.voltaics.capability.JouleCapabilities;
+import com.artillect.voltaics.capability.EnergyCapabilities;
 import com.artillect.voltaics.lib.JouleUtils;
-import com.artillect.voltaics.power.implementation.BaseJouleContainer;
+import com.artillect.voltaics.power.implementation.BaseEnergyContainer;
 import com.artillect.voltaics.tileentity.TileEntityLowVoltageConduit.EnumConduitConnection;
 
 public class TileEntityVoltaicPile extends TileEntity implements ITickable {
 	
-	private BaseJouleContainer container;
+	private BaseEnergyContainer container;
 	
 	public TileEntityVoltaicPile() {
-		this.container = new BaseJouleContainer(20000, 20000, 50, 50);
+		this.container = new BaseEnergyContainer(20000, 20000, 50, 50);
 	}
 	
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
-		this.container = new BaseJouleContainer(compound.getCompoundTag("JouleContainer"));
+		this.container = new BaseEnergyContainer(compound.getCompoundTag("JouleContainer"));
 	}
 	
 	@Override
@@ -50,7 +50,7 @@ public class TileEntityVoltaicPile extends TileEntity implements ITickable {
     @SuppressWarnings("unchecked")
     public <T> T getCapability (Capability<T> capability, EnumFacing facing) {
 
-        if (capability == JouleCapabilities.CAPABILITY_CONSUMER || capability == JouleCapabilities.CAPABILITY_HOLDER || capability == JouleCapabilities.CAPABILITY_PRODUCER)
+        if (capability == EnergyCapabilities.CAPABILITY_CONSUMER || capability == EnergyCapabilities.CAPABILITY_HOLDER || capability == EnergyCapabilities.CAPABILITY_PRODUCER)
             return (T) this.container;
             
         return super.getCapability(capability, facing);
@@ -59,7 +59,7 @@ public class TileEntityVoltaicPile extends TileEntity implements ITickable {
     @Override
     public boolean hasCapability (Capability<?> capability, EnumFacing facing) {
 
-        if (capability == JouleCapabilities.CAPABILITY_CONSUMER || capability == JouleCapabilities.CAPABILITY_HOLDER || capability == JouleCapabilities.CAPABILITY_PRODUCER)
+        if (capability == EnergyCapabilities.CAPABILITY_CONSUMER || capability == EnergyCapabilities.CAPABILITY_HOLDER || capability == EnergyCapabilities.CAPABILITY_PRODUCER)
             return true;
             
         return super.hasCapability(capability, facing);

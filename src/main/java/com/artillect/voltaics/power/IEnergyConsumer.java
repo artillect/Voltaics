@@ -1,6 +1,6 @@
 package com.artillect.voltaics.power;
 
-public interface IJouleConsumer {
+public interface IEnergyConsumer {
     
     /**
      * Offers power to the Tesla Consumer.

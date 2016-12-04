@@ -1,6 +1,6 @@
 package com.artillect.voltaics.power;
 
-public interface IJouleProducer {
+public interface IEnergyProducer {
     
     /**
      * Requests an amount of power from the Tesla Producer.

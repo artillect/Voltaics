@@ -3,11 +3,11 @@ package com.artillect.voltaics.lib;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.artillect.voltaics.capability.JouleCapabilities;
-import com.artillect.voltaics.power.IJouleConsumer;
-import com.artillect.voltaics.power.IJouleHolder;
-import com.artillect.voltaics.power.IJouleProducer;
-import com.artillect.voltaics.power.implementation.BaseJouleContainer;
+import com.artillect.voltaics.capability.EnergyCapabilities;
+import com.artillect.voltaics.power.IEnergyConsumer;
+import com.artillect.voltaics.power.IEnergyHolder;
+import com.artillect.voltaics.power.IEnergyProducer;
+import com.artillect.voltaics.power.implementation.BaseEnergyContainer;
 import com.mojang.realmsclient.gui.ChatFormatting;
 
 import net.minecraft.client.Minecraft;
@@ -134,7 +134,7 @@ public class JouleUtils {
      */
     public static boolean isJouleHolder (ICapabilityProvider provider, EnumFacing side) {
         
-        return provider.hasCapability(JouleCapabilities.CAPABILITY_HOLDER, side);
+        return provider.hasCapability(EnergyCapabilities.CAPABILITY_HOLDER, side);
     }
     
     /**
@@ -146,7 +146,7 @@ public class JouleUtils {
      */
     public static boolean isJouleConsumer (ICapabilityProvider provider, EnumFacing side) {
         
-        return provider.hasCapability(JouleCapabilities.CAPABILITY_CONSUMER, side);
+        return provider.hasCapability(EnergyCapabilities.CAPABILITY_CONSUMER, side);
     }
     
     /**
@@ -158,7 +158,7 @@ public class JouleUtils {
      */
     public static boolean isJouleProducer (ICapabilityProvider provider, EnumFacing side) {
         
-        return provider.hasCapability(JouleCapabilities.CAPABILITY_PRODUCER, side);
+        return provider.hasCapability(EnergyCapabilities.CAPABILITY_PRODUCER, side);
     }
     
     /**
@@ -168,9 +168,9 @@ public class JouleUtils {
      * @param side The side to access;
      * @return A Joule holder implementation, or null if none could be found.
      */
-    public static IJouleHolder getJouleHolder (ICapabilityProvider provider, EnumFacing side) {
+    public static IEnergyHolder getJouleHolder (ICapabilityProvider provider, EnumFacing side) {
         
-        return (IJouleHolder) provider.getCapability(JouleCapabilities.CAPABILITY_HOLDER, side);
+        return (IEnergyHolder) provider.getCapability(EnergyCapabilities.CAPABILITY_HOLDER, side);
     }
     
     /**
@@ -180,9 +180,9 @@ public class JouleUtils {
      * @param side The side to access;
      * @return A Joule consumer implementation, or null if none could be found.
      */
-    public static IJouleConsumer getJouleConsumer (ICapabilityProvider provider, EnumFacing side) {
+    public static IEnergyConsumer getJouleConsumer (ICapabilityProvider provider, EnumFacing side) {
         
-        return (IJouleConsumer) provider.getCapability(JouleCapabilities.CAPABILITY_CONSUMER, side);
+        return (IEnergyConsumer) provider.getCapability(EnergyCapabilities.CAPABILITY_CONSUMER, side);
     }
     
     /**
@@ -192,9 +192,9 @@ public class JouleUtils {
      * @param side The side to access;
      * @return A Joule producer implementation, or null if none could be found.
      */
-    public static IJouleProducer getJouleProducer (ICapabilityProvider provider, EnumFacing side) {
+    public static IEnergyProducer getJouleProducer (ICapabilityProvider provider, EnumFacing side) {
         
-        return (IJouleProducer) provider.getCapability(JouleCapabilities.CAPABILITY_PRODUCER, side);
+        return (IEnergyProducer) provider.getCapability(EnergyCapabilities.CAPABILITY_PRODUCER, side);
     }
     
     /**
@@ -284,7 +284,7 @@ public class JouleUtils {
         
         long consumedPower = 0L;
         
-        for (final IJouleConsumer consumer : getConnectedCapabilities(JouleCapabilities.CAPABILITY_CONSUMER, world, pos))
+        for (final IEnergyConsumer consumer : getConnectedCapabilities(EnergyCapabilities.CAPABILITY_CONSUMER, world, pos))
             consumedPower += consumer.givePower(amount, simulated);
             
         return consumedPower;
@@ -303,7 +303,7 @@ public class JouleUtils {
         
         long recievedPower = 0L;
         
-        for (final IJouleProducer producer : getConnectedCapabilities(JouleCapabilities.CAPABILITY_PRODUCER, world, pos))
+        for (final IEnergyProducer producer : getConnectedCapabilities(EnergyCapabilities.CAPABILITY_PRODUCER, world, pos))
             recievedPower += producer.takePower(amount, simulated);
             
         return recievedPower;
@@ -317,7 +317,7 @@ public class JouleUtils {
      */
     public static boolean isHolderCapability (Capability<?> capability) {
         
-        return capability == JouleCapabilities.CAPABILITY_HOLDER;
+        return capability == EnergyCapabilities.CAPABILITY_HOLDER;
     }
     
     /**
@@ -328,7 +328,7 @@ public class JouleUtils {
      */
     public static boolean isConsumerCapability (Capability<?> capability) {
         
-        return capability == JouleCapabilities.CAPABILITY_CONSUMER;
+        return capability == EnergyCapabilities.CAPABILITY_CONSUMER;
     }
     
     /**
@@ -339,7 +339,7 @@ public class JouleUtils {
      */
     public static boolean isProducerCapability (Capability<?> capability) {
         
-        return capability == JouleCapabilities.CAPABILITY_PRODUCER;
+        return capability == EnergyCapabilities.CAPABILITY_PRODUCER;
     }
     
     /**
@@ -366,15 +366,15 @@ public class JouleUtils {
         if (isJouleHolder(stack, EnumFacing.DOWN)) {
             
             final KeyBinding keyBindSneak = Minecraft.getMinecraft().gameSettings.keyBindSneak;
-            final IJouleHolder holder = JouleUtils.getJouleHolder(stack, EnumFacing.DOWN);
+            final IEnergyHolder holder = JouleUtils.getJouleHolder(stack, EnumFacing.DOWN);
             
             if (GameSettings.isKeyDown(keyBindSneak)) {
                 
                 addHolderInfo(holder, tooltip);
                 
-                if (holder instanceof BaseJouleContainer) {
+                if (holder instanceof BaseEnergyContainer) {
                     
-                    final BaseJouleContainer container = (BaseJouleContainer) holder;
+                    final BaseEnergyContainer container = (BaseEnergyContainer) holder;
                     tooltip.add(ChatFormatting.DARK_AQUA + I18n.format("tooltip.Joule.input", Long.toString(container.getInputRate())));
                     tooltip.add(ChatFormatting.DARK_AQUA + I18n.format("tooltip.Joule.output", Long.toString(container.getOutputRate())));
                 }
@@ -405,7 +405,7 @@ public class JouleUtils {
      * @param tooltip The tooltip to add the info to.
      */
     @SideOnly(Side.CLIENT)
-    public static void addHolderInfo (IJouleHolder holder, List<String> tooltip) {
+    public static void addHolderInfo (IEnergyHolder holder, List<String> tooltip) {
         
         addHolderInfo(holder.getStoredPower(), holder.getCapacity(), tooltip);
     }

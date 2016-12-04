@@ -1,8 +1,8 @@
 package com.artillect.voltaics.tileentity;
 
-import com.artillect.voltaics.capability.JouleCapabilities;
+import com.artillect.voltaics.capability.EnergyCapabilities;
 import com.artillect.voltaics.lib.JouleUtils;
-import com.artillect.voltaics.power.implementation.BaseJouleContainer;
+import com.artillect.voltaics.power.implementation.BaseEnergyContainer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -11,16 +11,16 @@ import net.minecraftforge.common.capabilities.Capability;
 
 public class TileEntityInductor extends TileEntity implements ITickable {
 
-	private BaseJouleContainer container;
+	private BaseEnergyContainer container;
 	
 	public TileEntityInductor() {
-		this.container = new BaseJouleContainer(0, 1000, 50, 50);
+		this.container = new BaseEnergyContainer(0, 1000, 50, 50);
 	}
 	
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
-		this.container = new BaseJouleContainer(compound.getCompoundTag("JouleContainer"));
+		this.container = new BaseEnergyContainer(compound.getCompoundTag("JouleContainer"));
 	}
 	
 	@Override
@@ -37,7 +37,7 @@ public class TileEntityInductor extends TileEntity implements ITickable {
     @SuppressWarnings("unchecked")
     public <T> T getCapability (Capability<T> capability, EnumFacing facing) {
 
-        if (capability == JouleCapabilities.CAPABILITY_CONSUMER || capability == JouleCapabilities.CAPABILITY_HOLDER)
+        if (capability == EnergyCapabilities.CAPABILITY_CONSUMER || capability == EnergyCapabilities.CAPABILITY_HOLDER)
             return (T) this.container;
             
         return super.getCapability(capability, facing);
@@ -46,7 +46,7 @@ public class TileEntityInductor extends TileEntity implements ITickable {
     @Override
     public boolean hasCapability (Capability<?> capability, EnumFacing facing) {
 
-        if (capability == JouleCapabilities.CAPABILITY_CONSUMER || capability == JouleCapabilities.CAPABILITY_HOLDER)
+        if (capability == EnergyCapabilities.CAPABILITY_CONSUMER || capability == EnergyCapabilities.CAPABILITY_HOLDER)
             return true;
             
         return super.hasCapability(capability, facing);
