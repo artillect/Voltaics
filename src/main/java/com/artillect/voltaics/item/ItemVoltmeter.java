@@ -20,7 +20,7 @@ public class ItemVoltmeter extends ItemBase {
 	}
 	
 	@Override
-	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) return EnumActionResult.FAIL;
 		TileEntity te = worldIn.getTileEntity(pos);
 		if (te == null) return EnumActionResult.FAIL;
@@ -31,8 +31,8 @@ public class ItemVoltmeter extends ItemBase {
 		
 		double storedEnergy = energyBuffer.getStoredPower();
 		double maxStoredEnergy = energyBuffer.getCapacity();		
-		playerIn.addChatMessage(new TextComponentString("Stored Energy: "+storedEnergy+" Therms"));
-		playerIn.addChatMessage(new TextComponentString("Max Energy Storage: "+maxStoredEnergy+" Therms"));
+		player.sendMessage(new TextComponentString("Stored Energy: "+storedEnergy+" Therms"));
+		player.sendMessage(new TextComponentString("Max Energy Storage: "+maxStoredEnergy+" Therms"));
 		return EnumActionResult.SUCCESS;
 	}
 }

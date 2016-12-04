@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = Voltaics.modId, name = Voltaics.name, version = Voltaics.version, acceptedMinecraftVersions = "[1.10.2]")
+@Mod(modid = Voltaics.modId, name = Voltaics.name, version = Voltaics.version, acceptedMinecraftVersions = "[1.12]")
 public class Voltaics {
 
 	public static final String modId = "voltaics";
