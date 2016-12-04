@@ -1,8 +1,8 @@
 package com.artillect.voltaics.block;
 
 import com.artillect.voltaics.tileentity.TileEntityInductor;
-import com.artillect.voltaics.tileentity.TileEntityVoltaicPile;
 
+//import com.artillect.voltaics.tileentity.TileEntityInductor;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;

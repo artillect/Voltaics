@@ -10,7 +10,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import com.artillect.voltaics.tileentity.ITileEntityBase;
 
 public class BlockTEBase extends BlockBase implements ITileEntityProvider {
 	public BlockTEBase(Material material, String name, boolean addToTab) {
@@ -20,15 +19,5 @@ public class BlockTEBase extends BlockBase implements ITileEntityProvider {
 	@Override
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return null;
-	}
-	
-	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, ItemStack heldItem, EnumFacing side, float hitX, float hitY, float hitZ){
-		return ((ITileEntityBase)world.getTileEntity(pos)).activate(world,pos,state,player,hand,heldItem,side,hitX,hitY,hitZ);
-	}
-	
-	@Override
-	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player){
-		((ITileEntityBase)world.getTileEntity(pos)).breakBlock(world,pos,state,player);
 	}
 }
