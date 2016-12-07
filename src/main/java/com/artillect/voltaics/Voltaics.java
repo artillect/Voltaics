@@ -27,7 +27,7 @@ public class Voltaics {
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
-		
+		RegistryManager.initR(); //initalize recepies
 	}
 
 	@Mod.EventHandler
