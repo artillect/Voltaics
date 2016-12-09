@@ -2,3 +2,7 @@ itemGroup.voltaics=Voltaics
 
 item.voltaics.voltmeter.name=Voltmeter
 item.voltaics.ingotCopper.name=Copper Ingot
+item.voltaics.ingotDuranizedCopper.name=Duranized Copper Ingot
+
+block.voltaics.dCopperOre.name=Duranized Copper Ore
+block.voltaics.copperOre.name=Copper Ore
