@@ -2,7 +2,6 @@ package com.artillect.voltaics.tileentity;
 
 import javax.annotation.Nullable;
 import com.artillect.voltaics.capability.EnergyCapabilities;
-import com.artillect.voltaics.lib.JouleUtils;
 import com.artillect.voltaics.power.implementation.BaseEnergyContainer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -119,8 +118,17 @@ public class TileEntityLowVoltageConduit extends TileEntity implements ITickable
             
         return super.hasCapability(capability, facing);
     }
-	
+    
 	@Override
 	public void update() {
+		for (EnumFacing side : EnumFacing.values()) {
+			final TileEntity tile = this.getWorld().getTileEntity(pos.offset(side));
+			if (tile != null && tile instanceof TileEntityLowVoltageConduit) {
+				long takerStored = tile.getCapability(EnergyCapabilities.CAPABILITY_HOLDER, side).getStoredPower();
+				if (this.container.getStoredPower() > takerStored) {
+					this.container.takePower(tile.getCapability(EnergyCapabilities.CAPABILITY_CONSUMER, side).givePower(Math.min(50, (this.container.getStoredPower() + takerStored)/2 - takerStored), false), false);
+				}
+			}
+		}
 	}
 }
