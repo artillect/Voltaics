@@ -27,5 +27,4 @@ public class ItemBase extends Item implements IModeledItem {
 	public void initModel(){
 		ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName().toString()));
 	}
-
 }
