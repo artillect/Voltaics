@@ -2,6 +2,10 @@ package com.artillect.voltaics.tileentity;
 
 import javax.annotation.Nullable;
 import com.artillect.voltaics.capability.EnergyCapabilities;
+<<<<<<< HEAD
+=======
+import com.artillect.voltaics.lib.JouleUtils;
+>>>>>>> 412301c... Renamed Joule to energy in classes and started making Heat system
 import com.artillect.voltaics.power.implementation.BaseEnergyContainer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
