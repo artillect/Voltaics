@@ -3,6 +3,7 @@ package com.artillect.voltaics.power.implementation;
 import com.artillect.voltaics.power.IEnergyConsumer;
 import com.artillect.voltaics.power.IEnergyHolder;
 import com.artillect.voltaics.power.IEnergyProducer;
+import com.artillect.voltaics.power.IHeat;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -12,7 +13,7 @@ import net.minecraftforge.common.util.INBTSerializable;
  * implementations do not need to use all three. The INBTSerializable interface is also
  * optional.
  */
-public class BaseEnergyContainer implements IEnergyConsumer, IEnergyProducer, IEnergyHolder, INBTSerializable<NBTTagCompound> {
+public class BaseHeatMachine implements IHeat, IEnergyConsumer, IEnergyProducer, IEnergyHolder, INBTSerializable<NBTTagCompound> {
     
     /**
      * The amount of stored Joule power.
@@ -34,14 +35,18 @@ public class BaseEnergyContainer implements IEnergyConsumer, IEnergyProducer, IE
      */
     private long outputRate;
     
+    private long temperature;
+    
+    private long meltingPoint;
+    
     /**
      * Default constructor. Sets capacity to 5000 and transfer rate to 50. This constructor
      * will not set the amount of stored power. These values are arbitrary and should not be
      * taken as a base line for balancing.
      */
-    public BaseEnergyContainer() {
+    public BaseHeatMachine() {
         
-        this(5000, 50, 50);
+        this(5000, 50, 50, 70, 1200);
     }
     
     /**
@@ -51,9 +56,9 @@ public class BaseEnergyContainer implements IEnergyConsumer, IEnergyProducer, IE
      * @param input The maximum rate of power that can be accepted at a time.
      * @param output The maximum rate of power that can be extracted at a time.
      */
-    public BaseEnergyContainer(long capacity, long input, long output) {
+    public BaseHeatMachine(long capacity, long input, long output, long temperature, long meltingPoint) {
         
-        this(0, capacity, input, output);
+        this(0, capacity, input, output, temperature, meltingPoint);
     }
     
     /**
@@ -64,12 +69,14 @@ public class BaseEnergyContainer implements IEnergyConsumer, IEnergyProducer, IE
      * @param input The maximum rate of power that can be accepted at a time.
      * @param output The maximum rate of power that can be extracted at a time.
      */
-    public BaseEnergyContainer(long power, long capacity, long input, long output) {
+    public BaseHeatMachine(long power, long capacity, long input, long output, long temperature, long meltingPoint) {
         
         this.stored = power;
         this.capacity = capacity;
         this.inputRate = input;
         this.outputRate = output;
+        this.temperature = temperature;
+        this.meltingPoint = meltingPoint;
     }
     
     /**
@@ -80,7 +87,7 @@ public class BaseEnergyContainer implements IEnergyConsumer, IEnergyProducer, IE
      * 
      * @param dataTag The NBTCompoundTag to read the important data from.
      */
-    public BaseEnergyContainer(NBTTagCompound dataTag) {
+    public BaseHeatMachine(NBTTagCompound dataTag) {
         
         this.deserializeNBT(dataTag);
     }
@@ -120,6 +127,35 @@ public class BaseEnergyContainer implements IEnergyConsumer, IEnergyProducer, IE
     }
     
     @Override
+    public long getTemperature () {
+    	return this.temperature;
+    }
+    
+    @Override
+    public long getMeltingPoint () {
+    	return this.meltingPoint;
+    }
+    
+    @Override
+    public long giveHeat (long heat, boolean simulated) {
+        final long acceptedHeat = 1;
+        
+        if (!simulated)
+            this.temperature += acceptedHeat;
+            
+        return acceptedHeat;
+    }
+    
+	@Override
+	public long takeHeat(long heat, boolean simulated) {
+		final long takenHeat = 1;
+		
+		if (!simulated)
+			this.temperature -= takenHeat;
+		return takenHeat;
+	}
+    
+    @Override
     public NBTTagCompound serializeNBT () {
         
         final NBTTagCompound dataTag = new NBTTagCompound();
@@ -127,6 +163,8 @@ public class BaseEnergyContainer implements IEnergyConsumer, IEnergyProducer, IE
         dataTag.setLong("JouleCapacity", this.capacity);
         dataTag.setLong("JouleInput", this.inputRate);
         dataTag.setLong("JouleOutput", this.outputRate);
+        dataTag.setLong("HeatTemperature", this.temperature);
+        dataTag.setLong("HeatMeltingPoint", this.meltingPoint);
         
         return dataTag;
     }
@@ -147,6 +185,12 @@ public class BaseEnergyContainer implements IEnergyConsumer, IEnergyProducer, IE
             
         if (this.stored > this.getCapacity())
             this.stored = this.getCapacity();
+        
+        if (nbt.hasKey("HeatTemperature"))
+            this.temperature = nbt.getLong("HeatTemperature");
+        
+        if (nbt.hasKey("HeatMeltingPoint"))
+            this.temperature = nbt.getLong("HeatMeltingPoint");
     }
     
     /**
@@ -156,7 +200,7 @@ public class BaseEnergyContainer implements IEnergyConsumer, IEnergyProducer, IE
      * @param capacity The new capacity for the container.
      * @return The instance of the container being updated.
      */
-    public BaseEnergyContainer setCapacity (long capacity) {
+    public BaseHeatMachine setCapacity (long capacity) {
         
         this.capacity = capacity;
         
@@ -182,7 +226,7 @@ public class BaseEnergyContainer implements IEnergyConsumer, IEnergyProducer, IE
      * @param rate The amount of Joule power to accept at a time.
      * @return The instance of the container being updated.
      */
-    public BaseEnergyContainer setInputRate (long rate) {
+    public BaseHeatMachine setInputRate (long rate) {
         
         this.inputRate = rate;
         return this;
@@ -204,7 +248,7 @@ public class BaseEnergyContainer implements IEnergyConsumer, IEnergyProducer, IE
      * @param rate The amount of Joule power that can be extracted.
      * @return The instance of the container being updated.
      */
-    public BaseEnergyContainer setOutputRate (long rate) {
+    public BaseHeatMachine setOutputRate (long rate) {
         
         this.outputRate = rate;
         return this;
@@ -217,10 +261,12 @@ public class BaseEnergyContainer implements IEnergyConsumer, IEnergyProducer, IE
      * @param rate The input/output rate for the Joule container.
      * @return The instance of the container being updated.
      */
-    public BaseEnergyContainer setTransferRate (long rate) {
+    public BaseHeatMachine setTransferRate (long rate) {
         
         this.setInputRate(rate);
         this.setOutputRate(rate);
         return this;
     }
+
+
 }

@@ -1,6 +1,6 @@
 {
     "parent" : "item/generated",
     "textures" : {
-        "layer0" : "voltaics:items/inductor"
+        "layer0" : "voltaics:items/ingotcopper"
     }
 }

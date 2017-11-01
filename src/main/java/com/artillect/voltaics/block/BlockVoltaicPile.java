@@ -3,6 +3,7 @@ package com.artillect.voltaics.block;
 import com.artillect.voltaics.tileentity.TileEntityLowVoltageConduit;
 import com.artillect.voltaics.tileentity.TileEntityVoltaicPile;
 
+import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
@@ -13,6 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
@@ -20,8 +22,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockVoltaicPile extends BlockTEBase {
-    public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
-
+	public static final PropertyDirection FACING = BlockHorizontal.FACING;
+	
 	public BlockVoltaicPile(Material material, String name, boolean addToTab) {
 		super(material, name, addToTab);
         setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
@@ -32,19 +34,15 @@ public class BlockVoltaicPile extends BlockTEBase {
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
 	}
 
-	public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
-	{
-		return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-	}
-	
+
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(FACING, EnumFacing.getFront(meta & 7));
+        return getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getIndex();
+    	return state.getValue(FACING).getHorizontalIndex();
     }
 
     @Override
@@ -52,8 +50,8 @@ public class BlockVoltaicPile extends BlockTEBase {
         return new BlockStateContainer(this, FACING);
     }
     
-
-	public void onBlockPlaced(World world, BlockPos pos, IBlockState state, EntityPlayer player){
+    @Override
+    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
 		if (world.getTileEntity(pos.up()) instanceof TileEntityLowVoltageConduit){
 			((TileEntityLowVoltageConduit)world.getTileEntity(pos.up())).updateNeighbors(world);
 		}
@@ -72,7 +70,9 @@ public class BlockVoltaicPile extends BlockTEBase {
 		if (world.getTileEntity(pos.east()) instanceof TileEntityLowVoltageConduit){
 			((TileEntityLowVoltageConduit)world.getTileEntity(pos.east())).updateNeighbors(world);
 		}
-	}
+    	return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
+
+    }
 	
 	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player){
 		if (world.getTileEntity(pos.up()) instanceof TileEntityLowVoltageConduit){

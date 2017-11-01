@@ -1,0 +1,23 @@
+{
+    "multipart": [
+        {   "apply": { "model": "voltaics:lowvoltageconduitcenter" }},
+        {   "when": { "up": "true" },
+            "apply": { "model": "voltaics:lowvoltageconduitside", "x": 270, "uvlock": true }
+        },
+        {   "when": { "down": "true" },
+            "apply": { "model": "voltaics:lowvoltageconduitside", "x": 90, "uvlock": true }
+        },
+        {   "when": { "north": "true" },
+            "apply": { "model": "voltaics:lowvoltageconduitside", "uvlock": true }
+        },
+        {   "when": { "east": "true" },
+            "apply": { "model": "voltaics:lowvoltageconduitside", "y": 90, "uvlock": true }
+        },
+        {   "when": { "south": "true" },
+            "apply": { "model": "voltaics:lowvoltageconduitside", "y": 180, "uvlock": true }
+        },
+        {   "when": { "west": "true" },
+            "apply": { "model": "voltaics:lowvoltageconduitside", "y": 270, "uvlock": true }
+        }
+    ]
+}

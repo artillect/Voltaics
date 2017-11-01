@@ -7,10 +7,13 @@ import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -91,8 +94,8 @@ public class BlockLowVoltageConduit extends BlockTEBase implements IModeledBlock
 	}*/
    
 
-
-	public void onBlockPlaced(World world, BlockPos pos, IBlockState state, EntityPlayer player){
+	@Override
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack){
 		if (world.getTileEntity(pos.up()) instanceof TileEntityLowVoltageConduit){
 			((TileEntityLowVoltageConduit)world.getTileEntity(pos.up())).updateNeighbors(world);
 		}
@@ -135,11 +138,13 @@ public class BlockLowVoltageConduit extends BlockTEBase implements IModeledBlock
 		}
 	}
 	
+	@Override
     public int getMetaFromState(IBlockState state)
     {
         return 0;
     }
 
+	@Override
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         return state
         		.withProperty(NORTH, Boolean.valueOf(this.canConnectTo(worldIn, pos.north(), EnumFacing.NORTH)))
@@ -159,10 +164,12 @@ public class BlockLowVoltageConduit extends BlockTEBase implements IModeledBlock
         return (te instanceof TileEntityLowVoltageConduit) || (te.hasCapability(EnergyCapabilities.CAPABILITY_HOLDER, direction.getOpposite()));
     }
     
+    @Override
     public TileEntity createNewTileEntity(World worldIn, int meta) {
     	return new TileEntityLowVoltageConduit();
     }
     
+    @Override
     protected BlockStateContainer createBlockState()
     {
         return new BlockStateContainer(this, new IProperty[] {UP, DOWN, NORTH, EAST, WEST, SOUTH});
