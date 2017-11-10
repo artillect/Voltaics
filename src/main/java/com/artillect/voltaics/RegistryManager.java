@@ -22,6 +22,7 @@ import com.artillect.voltaics.tileentity.TileEntityInductor;
 //import com.artillect.voltaics.tileentity.TileEntityInductor;
 import com.artillect.voltaics.tileentity.TileEntityLowVoltageConduit;
 import com.artillect.voltaics.tileentity.TileEntityVoltaicPile;
+import com.artillect.voltaics.block.BlockCopperOre;
 import com.artillect.voltaics.block.BlockInductor;
 import com.artillect.voltaics.block.BlockLowVoltageConduit;
 import com.artillect.voltaics.block.BlockVoltaicPile;
