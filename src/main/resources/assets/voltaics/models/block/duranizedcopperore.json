@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "voltaics:blocks/dcopperOre",
+    "down": "voltaics:blocks/dcopperOre",
+    "up": "voltaics:blocks/dcopperOre",
+    "east": "voltaics:blocks/dcopperOre",
+    "west": "voltaics:blocks/dcopperOre",
+    "north": "voltaics:blocks/dcopperOre",
+    "south": "voltaics:blocks/dcopperOre"
+  }
+}

@@ -23,7 +23,7 @@ public class TileEntityInductor extends TileEntity implements ITickable {
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
-		this.container = new BaseHeatMachine(compound.getCompoundTag("JouleContainer"));
+		this.container = new BaseHeatMachine(compound.getCompoundTag("HeatContainer"));
 	}
 	
 	@Override
