@@ -2,9 +2,7 @@ package com.artillect.voltaics.item;
 
 import com.artillect.voltaics.capability.EnergyCapabilities;
 import com.artillect.voltaics.power.IEnergyHolder;
-
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;

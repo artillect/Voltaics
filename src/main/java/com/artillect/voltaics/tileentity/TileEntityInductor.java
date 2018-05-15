@@ -3,9 +3,13 @@ package com.artillect.voltaics.tileentity;
 import com.artillect.voltaics.capability.EnergyCapabilities;
 import com.artillect.voltaics.capability.HeatCapabilities;
 import com.artillect.voltaics.lib.JouleUtils;
+import com.artillect.voltaics.power.IEnergyConsumer;
+import com.artillect.voltaics.power.IHeat;
 import com.artillect.voltaics.power.implementation.BaseEnergyContainer;
 import com.artillect.voltaics.power.implementation.BaseHeatMachine;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -17,7 +21,7 @@ public class TileEntityInductor extends TileEntity implements ITickable {
 	private BaseHeatMachine container;
 	
 	public TileEntityInductor() {
-		this.container = new BaseHeatMachine(0, 1000, 50, 50, 70, 1200);
+		this.container = new BaseHeatMachine(0, 1000, 50, 50, 20, 1200);
 	}
 	
 	@Override
@@ -57,10 +61,21 @@ public class TileEntityInductor extends TileEntity implements ITickable {
 
     @Override
     public void update() {
-    	//this.container.givePower(JouleUtils.consumePowerFromAllFaces(this.getWorld(), pos, Math.min(this.container.getCapacity()-this.container.getStoredPower(), this.container.getInputRate()), false), false);
     	if (this.container.getStoredPower() >= 50) {
     		this.container.takePower(50, false);
-    		this.container.giveHeat(1, false);
+    		this.container.giveHeat(1/(1+0.00393*(this.container.getTemperature()-20)), false);
     	}
+
+    	double lostHeat = 0;
+    	double lostDegrees = 0;
+        for (final EnumFacing side : EnumFacing.values()) {
+            final Block block = world.getBlockState(pos.offset(side)).getBlock();
+			final TileEntity tile = this.getWorld().getTileEntity(pos.offset(side));
+            if (block == Blocks.AIR) {
+            	lostHeat = 7.9*(this.getCapability(HeatCapabilities.CAPABILITY_HEAT, side).getTemperature() - 20);
+                lostDegrees = lostHeat/4600;
+            	this.container.takeHeat(lostDegrees, false);
+            }
+        }
     }
 }

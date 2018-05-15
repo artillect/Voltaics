@@ -1,17 +1,12 @@
 package com.artillect.voltaics.block;
 
+import com.artillect.voltaics.Voltaics;
+
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
 
-public class BlockCopperOre extends BlockBase{
-    public BlockCopperOre(String unlocalizedName) {
-        super(Material.ROCK, unlocalizedName, true);
-        setHardness(3f);
-        setResistance(5f);
+public class BlockCopperOre extends BlockBase {
+	public BlockCopperOre(Material material, String name, boolean addToTab) {
+		super(material, name, addToTab);
     }
-
-    public BlockCopperOre setCreativeTab(CreativeTabs tab) {
-		super.setCreativeTab(tab);
-		return this;
-	}
 }

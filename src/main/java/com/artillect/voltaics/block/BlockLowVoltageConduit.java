@@ -96,6 +96,9 @@ public class BlockLowVoltageConduit extends BlockTEBase implements IModeledBlock
 
 	@Override
 	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack){
+		if (world.getTileEntity(pos) instanceof TileEntityLowVoltageConduit){
+			((TileEntityLowVoltageConduit)world.getTileEntity(pos)).updateNeighbors(world);
+		}
 		if (world.getTileEntity(pos.up()) instanceof TileEntityLowVoltageConduit){
 			((TileEntityLowVoltageConduit)world.getTileEntity(pos.up())).updateNeighbors(world);
 		}

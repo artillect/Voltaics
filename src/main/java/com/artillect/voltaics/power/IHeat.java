@@ -1,8 +1,10 @@
 package com.artillect.voltaics.power;
 
+import net.minecraft.tileentity.TileEntity;
+
 public interface IHeat {
-    long takeHeat(long heat, boolean simulated);
-    long getTemperature();
-    long getMeltingPoint();
-    long giveHeat(long heat, boolean simulated);
+    double takeHeat(double heat, boolean simulated);
+    double getTemperature();
+    double getMeltingPoint();
+    double giveHeat(double heat, boolean simulated);
 }

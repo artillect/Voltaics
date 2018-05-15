@@ -1,12 +1,12 @@
-{
+s{
   "parent": "block/cube",
   "textures": {
-    "particle": "voltaics:blocks/voltaicPileSide",
-    "down": "voltaics:blocks/voltaicPileTop",
-    "up": "voltaics:blocks/voltaicPileTop",
-    "east": "voltaics:blocks/voltaicPileSide",
-    "west": "voltaics:blocks/voltaicPileSide",
-    "north": "voltaics:blocks/voltaicPileTop",
-    "south": "voltaics:blocks/voltaicPileSide"
+    "particle": "voltaics:blocks/voltaicpileside",
+    "down": "voltaics:blocks/voltaicpiletop",
+    "up": "voltaics:blocks/voltaicpiletop",
+    "east": "voltaics:blocks/voltaicpileside",
+    "west": "voltaics:blocks/voltaicpileside",
+    "north": "voltaics:blocks/voltaicpiletop",
+    "south": "voltaics:blocks/voltaicpileside"
   }
 }

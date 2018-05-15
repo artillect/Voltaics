@@ -6,6 +6,7 @@ import com.artillect.voltaics.power.IEnergyProducer;
 import com.artillect.voltaics.power.IHeat;
 
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.INBTSerializable;
 
 /**
@@ -35,9 +36,9 @@ public class BaseHeatMachine implements IHeat, IEnergyConsumer, IEnergyProducer,
      */
     private long outputRate;
     
-    private long temperature;
+    private double temperature;
     
-    private long meltingPoint;
+    private double meltingPoint;
     
     /**
      * Default constructor. Sets capacity to 5000 and transfer rate to 50. This constructor
@@ -46,7 +47,7 @@ public class BaseHeatMachine implements IHeat, IEnergyConsumer, IEnergyProducer,
      */
     public BaseHeatMachine() {
         
-        this(5000, 50, 50, 70, 1200);
+        this(5000, 50, 50, 20, 1200);
     }
     
     /**
@@ -56,7 +57,7 @@ public class BaseHeatMachine implements IHeat, IEnergyConsumer, IEnergyProducer,
      * @param input The maximum rate of power that can be accepted at a time.
      * @param output The maximum rate of power that can be extracted at a time.
      */
-    public BaseHeatMachine(long capacity, long input, long output, long temperature, long meltingPoint) {
+    public BaseHeatMachine(long capacity, long input, long output, double temperature, double meltingPoint) {
         
         this(0, capacity, input, output, temperature, meltingPoint);
     }
@@ -69,7 +70,7 @@ public class BaseHeatMachine implements IHeat, IEnergyConsumer, IEnergyProducer,
      * @param input The maximum rate of power that can be accepted at a time.
      * @param output The maximum rate of power that can be extracted at a time.
      */
-    public BaseHeatMachine(long power, long capacity, long input, long output, long temperature, long meltingPoint) {
+    public BaseHeatMachine(long power, long capacity, long input, long output, double temperature, double meltingPoint) {
         
         this.stored = power;
         this.capacity = capacity;
@@ -127,18 +128,18 @@ public class BaseHeatMachine implements IHeat, IEnergyConsumer, IEnergyProducer,
     }
     
     @Override
-    public long getTemperature () {
+    public double getTemperature () {
     	return this.temperature;
     }
     
     @Override
-    public long getMeltingPoint () {
+    public double getMeltingPoint () {
     	return this.meltingPoint;
     }
     
     @Override
-    public long giveHeat (long heat, boolean simulated) {
-        final long acceptedHeat = 1;
+    public double giveHeat (double heat, boolean simulated) {
+        final double acceptedHeat = heat;
         
         if (!simulated)
             this.temperature += acceptedHeat;
@@ -147,8 +148,8 @@ public class BaseHeatMachine implements IHeat, IEnergyConsumer, IEnergyProducer,
     }
     
 	@Override
-	public long takeHeat(long heat, boolean simulated) {
-		final long takenHeat = 1;
+	public double takeHeat(double lostDegrees, boolean simulated) {
+		final double takenHeat = lostDegrees;
 		
 		if (!simulated)
 			this.temperature -= takenHeat;
@@ -163,8 +164,8 @@ public class BaseHeatMachine implements IHeat, IEnergyConsumer, IEnergyProducer,
         dataTag.setLong("JouleCapacity", this.capacity);
         dataTag.setLong("JouleInput", this.inputRate);
         dataTag.setLong("JouleOutput", this.outputRate);
-        dataTag.setLong("HeatTemperature", this.temperature);
-        dataTag.setLong("HeatMeltingPoint", this.meltingPoint);
+        dataTag.setDouble("HeatTemperature", this.temperature);
+        dataTag.setDouble("HeatMeltingPoint", this.meltingPoint);
         
         return dataTag;
     }
@@ -187,10 +188,10 @@ public class BaseHeatMachine implements IHeat, IEnergyConsumer, IEnergyProducer,
             this.stored = this.getCapacity();
         
         if (nbt.hasKey("HeatTemperature"))
-            this.temperature = nbt.getLong("HeatTemperature");
+            this.temperature = nbt.getDouble("HeatTemperature");
         
         if (nbt.hasKey("HeatMeltingPoint"))
-            this.temperature = nbt.getLong("HeatMeltingPoint");
+            this.meltingPoint = nbt.getDouble("HeatMeltingPoint");
     }
     
     /**
@@ -267,6 +268,4 @@ public class BaseHeatMachine implements IHeat, IEnergyConsumer, IEnergyProducer,
         this.setOutputRate(rate);
         return this;
     }
-
-
 }

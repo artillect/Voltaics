@@ -1,16 +1,10 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "voltaics:copperOre"
+    "model": "voltaics:copperore"
   },
   "variants": {
     "normal": [{}],
-    "inventory": [{}],
-    "facing": {
-      "north": {},
-      "east": {"y": 90},
-      "south": {"y": 180},
-      "west": {"y": 270}
-    }
+    "inventory": [{}]
   }
 }

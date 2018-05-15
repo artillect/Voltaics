@@ -1,7 +1,7 @@
 {
     "textures": {
-        "particle": "voltaics:blocks/lowVoltageConduit",
-        "0":"voltaics:blocks/lowVoltageConduit"
+        "particle": "voltaics:blocks/lowvoltageconduit",
+        "0":"voltaics:blocks/lowvoltageconduit"
     },
     "elements": [
         {   "from": [ 6, 6, 6 ],

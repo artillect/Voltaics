@@ -128,6 +128,13 @@ public class TileEntityLowVoltageConduit extends TileEntity implements ITickable
 				if (this.container.getStoredPower() > takerStored) {
 					this.container.takePower(tile.getCapability(EnergyCapabilities.CAPABILITY_CONSUMER, side).givePower(Math.min(50, (this.container.getStoredPower() + takerStored)/2 - takerStored), false), false);
 				}
+			} else 
+			if (tile != null && tile.hasCapability(EnergyCapabilities.CAPABILITY_CONSUMER, side)) {
+				long takerStored = tile.getCapability(EnergyCapabilities.CAPABILITY_HOLDER, side).getStoredPower();
+				long takerCapacity = tile.getCapability(EnergyCapabilities.CAPABILITY_HOLDER, side).getCapacity();
+				if (this.container.getStoredPower() > takerStored) {
+					this.container.takePower(tile.getCapability(EnergyCapabilities.CAPABILITY_CONSUMER, side).givePower(Math.min(50, takerCapacity-takerStored), false), false);
+				}
 			}
 		}
 	}

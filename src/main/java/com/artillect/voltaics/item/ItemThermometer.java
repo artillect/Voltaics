@@ -1,12 +1,9 @@
 package com.artillect.voltaics.item;
 
-import com.artillect.voltaics.capability.EnergyCapabilities;
 import com.artillect.voltaics.capability.HeatCapabilities;
-import com.artillect.voltaics.power.IEnergyHolder;
 import com.artillect.voltaics.power.IHeat;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -31,7 +28,7 @@ public class ItemThermometer extends ItemBase {
 
 		IHeat heatBuffer = te.getCapability(HeatCapabilities.CAPABILITY_HEAT, facing);
 		
-		double temperature = heatBuffer.getTemperature();		
+		int temperature = (int) heatBuffer.getTemperature();		
 		player.sendMessage(new TextComponentString("Temperature: "+temperature+" C"));
 		return EnumActionResult.SUCCESS;
 	}
