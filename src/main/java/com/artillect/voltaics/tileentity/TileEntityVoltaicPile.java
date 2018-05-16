@@ -50,19 +50,26 @@ public class TileEntityVoltaicPile extends TileEntity implements ITickable {
     @SuppressWarnings("unchecked")
     public <T> T getCapability (Capability<T> capability, EnumFacing facing) {
 
-        if (capability == EnergyCapabilities.CAPABILITY_CONSUMER || capability == EnergyCapabilities.CAPABILITY_HOLDER || capability == EnergyCapabilities.CAPABILITY_PRODUCER)
-            return (T) this.container;
+    	if ((capability == EnergyCapabilities.CAPABILITY_HOLDER || capability == EnergyCapabilities.CAPABILITY_PRODUCER) && facing == EnumFacing.UP) {
+			return (T) this.container;
+    	}
+    	else if ((capability == EnergyCapabilities.CAPABILITY_HOLDER || capability == EnergyCapabilities.CAPABILITY_CONSUMER) && facing == EnumFacing.DOWN) {
+    		return (T) this.container;
+    	}
             
         return super.getCapability(capability, facing);
     }
     
     @Override
     public boolean hasCapability (Capability<?> capability, EnumFacing facing) {
-
-        if (capability == EnergyCapabilities.CAPABILITY_CONSUMER || capability == EnergyCapabilities.CAPABILITY_HOLDER || capability == EnergyCapabilities.CAPABILITY_PRODUCER)
-            return true;
-            
-        return super.hasCapability(capability, facing);
+    	
+    	if ((capability == EnergyCapabilities.CAPABILITY_HOLDER || capability == EnergyCapabilities.CAPABILITY_PRODUCER) && facing == EnumFacing.UP) {
+			return true;
+    	}
+    	else if ((capability == EnergyCapabilities.CAPABILITY_HOLDER || capability == EnergyCapabilities.CAPABILITY_CONSUMER) && facing == EnumFacing.DOWN) {
+    		return true;
+    	}
+    	else return false;    
     }
 
 	@Override
