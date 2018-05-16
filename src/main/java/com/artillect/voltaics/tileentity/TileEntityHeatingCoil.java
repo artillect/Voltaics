@@ -2,28 +2,30 @@ package com.artillect.voltaics.tileentity;
 
 import com.artillect.voltaics.capability.EnergyCapabilities;
 import com.artillect.voltaics.capability.HeatCapabilities;
+import com.artillect.voltaics.lib.JouleUtils;
+import com.artillect.voltaics.power.IEnergyConsumer;
+import com.artillect.voltaics.power.IHeat;
+import com.artillect.voltaics.power.implementation.BaseEnergyContainer;
 import com.artillect.voltaics.power.implementation.BaseHeatMachine;
 
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityHeatingChamber extends TileEntity implements ITickable {
+public class TileEntityHeatingCoil extends TileEntity implements ITickable {
 
-	private ItemStackHandler inventory = new ItemStackHandler(2);
 	private BaseHeatMachine container;
 	
-	public TileEntityHeatingChamber() {
+	public TileEntityHeatingCoil() {
 		this.container = new BaseHeatMachine(0, 1000, 50, 50, 20, 1200);
 	}
 	
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
-		inventory.deserializeNBT(compound.getCompoundTag("inventory"));
 		super.readFromNBT(compound);
 		this.container = new BaseHeatMachine(compound.getCompoundTag("HeatContainer"));
 	}
@@ -31,22 +33,19 @@ public class TileEntityHeatingChamber extends TileEntity implements ITickable {
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		compound.setTag("JouleContainer", this.container.serializeNBT());
-		compound.setTag("inventory", inventory.serializeNBT());
 		return super.writeToNBT(compound);
 	}
 	@Override
 	public NBTTagCompound getUpdateTag() {
 		return writeToNBT(new NBTTagCompound());
 	}
-
+	
     @Override
     @SuppressWarnings("unchecked")
     public <T> T getCapability (Capability<T> capability, EnumFacing facing) {
 
         if (capability == EnergyCapabilities.CAPABILITY_CONSUMER || capability == EnergyCapabilities.CAPABILITY_HOLDER)
             return (T) this.container;
-        else if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-        	return (T) this.inventory;
             
         return super.getCapability(capability, facing);
     }
@@ -56,23 +55,27 @@ public class TileEntityHeatingChamber extends TileEntity implements ITickable {
 
         if (capability == EnergyCapabilities.CAPABILITY_CONSUMER || capability == EnergyCapabilities.CAPABILITY_HOLDER || capability == HeatCapabilities.CAPABILITY_HEAT)
             return true;
-        else if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-        	return true;
             
         return super.hasCapability(capability, facing);
     }
-	
-	@Override
-	public void update() {
-		for (EnumFacing side : EnumFacing.values()) {
-			final TileEntity tile = this.getWorld().getTileEntity(pos.offset(side));
-			if (tile != null && tile.hasCapability(HeatCapabilities.CAPABILITY_HEAT,side)) {
-				double takenHeat = 7.9*(tile.getCapability(HeatCapabilities.CAPABILITY_HEAT, side.getOpposite()).getTemperature()-this.container.getTemperature());
-				double takenDegrees = takenHeat/4600;
-				tile.getCapability(HeatCapabilities.CAPABILITY_HEAT, side).takeHeat(takenDegrees, false);
-				this.container.giveHeat(takenDegrees, false);
-			}
-		}
-	}
 
+    @Override
+    public void update() {
+    	if (this.container.getStoredPower() >= 50) {
+    		this.container.takePower(50, false);
+    		this.container.giveHeat(1/(1+0.00393*(this.container.getTemperature()-20)), false);
+    	}
+
+    	double lostHeat = 0;
+    	double lostDegrees = 0;
+        for (final EnumFacing side : EnumFacing.values()) {
+            final Block block = world.getBlockState(pos.offset(side)).getBlock();
+			final TileEntity tile = this.getWorld().getTileEntity(pos.offset(side));
+            if (block == Blocks.AIR) {
+            	lostHeat = 7.9*(this.getCapability(HeatCapabilities.CAPABILITY_HEAT, side).getTemperature() - 20);
+                lostDegrees = lostHeat/4600;
+            	this.container.takeHeat(lostDegrees, false);
+            }
+        }
+    }
 }

@@ -67,6 +67,15 @@ public class TileEntityVoltaicPile extends TileEntity implements ITickable {
 
 	@Override
 	public void update() {
-		this.container.takePower(JouleUtils.distributePowerToAllFaces(this.getWorld(), pos, 50, false), false); //Replace 20 with JouleUtils.distributePowerToAllFaces(this.getWorld(), pos, 50, false)
+		TileEntity tile = this.getWorld().getTileEntity(pos.offset(EnumFacing.UP));
+		if (tile != null && tile.hasCapability(EnergyCapabilities.CAPABILITY_CONSUMER, EnumFacing.DOWN) && tile.hasCapability(EnergyCapabilities.CAPABILITY_HOLDER, EnumFacing.DOWN)) {
+			long takenPower = tile.getCapability(EnergyCapabilities.CAPABILITY_CONSUMER, EnumFacing.DOWN).givePower(Math.min(50, tile.getCapability(EnergyCapabilities.CAPABILITY_HOLDER, EnumFacing.DOWN).getCapacity()-tile.getCapability(EnergyCapabilities.CAPABILITY_HOLDER, EnumFacing.DOWN).getStoredPower()), false);
+			this.container.takePower(takenPower, false); //Replace 20 with JouleUtils.distributePowerToAllFaces(this.getWorld(), pos, 50, false)
+		}
+		tile = this.getWorld().getTileEntity(pos.offset(EnumFacing.DOWN));
+		if (tile != null && tile.hasCapability(EnergyCapabilities.CAPABILITY_PRODUCER, EnumFacing.UP) && tile.hasCapability(EnergyCapabilities.CAPABILITY_HOLDER, EnumFacing.UP)) {
+			long givenPower = tile.getCapability(EnergyCapabilities.CAPABILITY_PRODUCER, EnumFacing.UP).takePower(Math.min(50, Math.min(this.container.getCapacity()-this.container.getStoredPower(), tile.getCapability(EnergyCapabilities.CAPABILITY_HOLDER, EnumFacing.UP).getStoredPower())), false);
+			this.container.givePower(givenPower, false);
+		}
 	}
 }

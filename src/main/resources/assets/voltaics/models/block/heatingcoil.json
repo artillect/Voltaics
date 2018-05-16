@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "voltaics:blocks/copperore",
+    "down": "voltaics:blocks/copperore",
+    "up": "voltaics:blocks/copperore",
+    "east": "voltaics:blocks/copperore",
+    "west": "voltaics:blocks/copperore",
+    "north": "voltaics:blocks/copperore",
+    "south": "voltaics:blocks/copperore"
+  }
+}

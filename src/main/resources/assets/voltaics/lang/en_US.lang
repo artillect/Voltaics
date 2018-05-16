@@ -4,3 +4,5 @@ item.voltaics.voltmeter.name=Voltmeter
 item.voltaics.ingotCopper.name=Copper Ingot
 
 tile.voltaics.copperOre.name=Copper Ore
+tile.voltaics.heatingCoil.name=Heating Coil
+tile.voltaics.voltaicPile.name=Voltaic Pile

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.artillect.voltaics.block.BlockCopperOre;
 import com.artillect.voltaics.block.BlockHeatingChamber;
-import com.artillect.voltaics.block.BlockInductor;
+import com.artillect.voltaics.block.BlockHeatingCoil;
 import com.artillect.voltaics.block.BlockLowVoltageConduit;
 import com.artillect.voltaics.block.BlockVoltaicPile;
 import com.artillect.voltaics.block.IModeledBlock;
@@ -14,7 +14,7 @@ import com.artillect.voltaics.item.ItemIngotCopper;
 import com.artillect.voltaics.item.ItemVoltmeter;
 import com.artillect.voltaics.item.ItemThermometer;
 
-import com.artillect.voltaics.tileentity.TileEntityInductor;
+import com.artillect.voltaics.tileentity.TileEntityHeatingCoil;
 import com.artillect.voltaics.tileentity.TileEntityLowVoltageConduit;
 import com.artillect.voltaics.tileentity.TileEntityVoltaicPile;
 
@@ -32,7 +32,7 @@ public class RegistryManager {
 	public static ArrayList<Block> blocks = new ArrayList<Block>();
 	public static ArrayList<Item> items = new ArrayList<Item>();
 	public static Item voltmeter, hammer, ingotCopper, thermometer;
-	public static Block voltaicPile, lowVoltageConduit, inductor, copperOre, heatingChamber;
+	public static Block voltaicPile, lowVoltageConduit, heatingCoil, copperOre, heatingChamber;
 	
 	public static void registerAll(){
 		//register items
@@ -44,14 +44,14 @@ public class RegistryManager {
 		//register blocks
 		blocks.add(voltaicPile = (new BlockVoltaicPile(Material.ROCK,"voltaicPile",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.4f));
 		blocks.add(lowVoltageConduit = (new BlockLowVoltageConduit(Material.ROCK,"lowVoltageConduit",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.0f));
-		blocks.add(inductor = (new BlockInductor(Material.ROCK,"inductor",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.4f));
+		blocks.add(heatingCoil = (new BlockHeatingCoil(Material.ROCK,"heatingCoil",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.4f));
 		blocks.add(copperOre = (new BlockCopperOre(Material.ROCK,"copperOre",true)));
 		blocks.add(heatingChamber = (new BlockHeatingChamber(Material.ROCK,"heatingChamber",true)));
 		
 		//register tile entities from blocks
 		GameRegistry.registerTileEntity(TileEntityVoltaicPile.class, Voltaics.modId+":tileEntityVoltaicPile");
 		GameRegistry.registerTileEntity(TileEntityLowVoltageConduit.class, Voltaics.modId+":tileEntityLowVoltageConduit");
-		GameRegistry.registerTileEntity(TileEntityInductor.class, Voltaics.modId+":tileEntityInductor");
+		GameRegistry.registerTileEntity(TileEntityHeatingCoil.class, Voltaics.modId+":tileEntityInductor");
 		
 		//register ores from blocks
 		OreDictionary.registerOre("oreCopper", copperOre);
