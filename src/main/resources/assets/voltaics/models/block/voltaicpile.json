@@ -1,5 +1,5 @@
 {
-  "parent": "block/orientable",
+  "parent": "block/cube",
   "textures": {
     "particle": "voltaics:blocks/voltaicpileside",
     "down": "voltaics:blocks/voltaicpilebottom",

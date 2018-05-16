@@ -26,53 +26,12 @@ public class BlockVoltaicPile extends BlockTEBase {
 	
 	public BlockVoltaicPile(Material material, String name, boolean addToTab) {
 		super(material, name, addToTab);
-        setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 	}
 
 	@SideOnly(Side.CLIENT)
 	public void initModel() {
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
 	}
-
-
-    @Override
-    public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
-    }
-
-    @Override
-    public int getMetaFromState(IBlockState state) {
-    	return state.getValue(FACING).getHorizontalIndex();
-    }
-
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FACING);
-    }
-    
-    @Override
-    public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
-		if (world.getTileEntity(pos.up()) instanceof TileEntityLowVoltageConduit){
-			((TileEntityLowVoltageConduit)world.getTileEntity(pos.up())).updateNeighbors(world);
-		}
-		if (world.getTileEntity(pos.down()) instanceof TileEntityLowVoltageConduit){
-			((TileEntityLowVoltageConduit)world.getTileEntity(pos.down())).updateNeighbors(world);
-		}
-		if (world.getTileEntity(pos.north()) instanceof TileEntityLowVoltageConduit){
-			((TileEntityLowVoltageConduit)world.getTileEntity(pos.north())).updateNeighbors(world);
-		}
-		if (world.getTileEntity(pos.south()) instanceof TileEntityLowVoltageConduit){
-			((TileEntityLowVoltageConduit)world.getTileEntity(pos.south())).updateNeighbors(world);
-		}
-		if (world.getTileEntity(pos.west()) instanceof TileEntityLowVoltageConduit){
-			((TileEntityLowVoltageConduit)world.getTileEntity(pos.west())).updateNeighbors(world);
-		}
-		if (world.getTileEntity(pos.east()) instanceof TileEntityLowVoltageConduit){
-			((TileEntityLowVoltageConduit)world.getTileEntity(pos.east())).updateNeighbors(world);
-		}
-    	return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
-
-    }
 	
 	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player){
 		if (world.getTileEntity(pos.up()) instanceof TileEntityLowVoltageConduit){
