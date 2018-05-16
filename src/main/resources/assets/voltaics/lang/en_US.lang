@@ -6,6 +6,7 @@ item.voltaics.hammer.name=Hammer
 item.voltaics.ingotCopper.name=Copper Ingot
 
 tile.voltaics.copperOre.name=Copper Ore
+tile.voltaics.zincOre.name=Zinc Ore
 tile.voltaics.heatingCoil.name=Heating Coil
 tile.voltaics.voltaicPile.name=Voltaic Pile
 tile.voltaics.heatingChamber.name=Heating Chamber

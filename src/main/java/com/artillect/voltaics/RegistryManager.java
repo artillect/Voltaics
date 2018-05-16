@@ -7,13 +7,13 @@ import com.artillect.voltaics.block.BlockHeatingChamber;
 import com.artillect.voltaics.block.BlockHeatingCoil;
 import com.artillect.voltaics.block.BlockLowVoltageConduit;
 import com.artillect.voltaics.block.BlockVoltaicPile;
+import com.artillect.voltaics.block.BlockZincOre;
 import com.artillect.voltaics.block.IModeledBlock;
 import com.artillect.voltaics.item.IModeledItem;
 import com.artillect.voltaics.item.ItemHammer;
 import com.artillect.voltaics.item.ItemIngotCopper;
-import com.artillect.voltaics.item.ItemVoltmeter;
 import com.artillect.voltaics.item.ItemThermometer;
-
+import com.artillect.voltaics.item.ItemVoltmeter;
 import com.artillect.voltaics.tileentity.TileEntityHeatingCoil;
 import com.artillect.voltaics.tileentity.TileEntityLowVoltageConduit;
 import com.artillect.voltaics.tileentity.TileEntityVoltaicPile;
@@ -32,7 +32,7 @@ public class RegistryManager {
 	public static ArrayList<Block> blocks = new ArrayList<Block>();
 	public static ArrayList<Item> items = new ArrayList<Item>();
 	public static Item voltmeter, hammer, ingotCopper, thermometer;
-	public static Block voltaicPile, lowVoltageConduit, heatingCoil, copperOre, heatingChamber;
+	public static Block voltaicPile, lowVoltageConduit, heatingCoil, copperOre, zincOre, heatingChamber;
 	
 	public static void registerAll(){
 		//register items
@@ -46,6 +46,7 @@ public class RegistryManager {
 		blocks.add(lowVoltageConduit = (new BlockLowVoltageConduit(Material.ROCK,"lowVoltageConduit",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.0f));
 		blocks.add(heatingCoil = (new BlockHeatingCoil(Material.ROCK,"heatingCoil",true)).setIsFullCube(false).setIsOpaqueCube(false).setHarvestProperties("pickaxe", 0).setHardness(1.4f));
 		blocks.add(copperOre = (new BlockCopperOre(Material.ROCK,"copperOre",true)));
+		blocks.add(zincOre = (new BlockZincOre(Material.ROCK,"zincOre",true)));
 		blocks.add(heatingChamber = (new BlockHeatingChamber(Material.ROCK,"heatingChamber",true)));
 		
 		//register tile entities from blocks
