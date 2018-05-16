@@ -1,8 +1,12 @@
 itemGroup.voltaics=Voltaics
 
 item.voltaics.voltmeter.name=Voltmeter
+item.voltaics.thermometer.name=Thermometer
+item.voltaics.hammer.name=Hammer
 item.voltaics.ingotCopper.name=Copper Ingot
 
 tile.voltaics.copperOre.name=Copper Ore
 tile.voltaics.heatingCoil.name=Heating Coil
 tile.voltaics.voltaicPile.name=Voltaic Pile
+tile.voltaics.heatingChamber.name=Heating Chamber
+tile.voltaics.lowVoltageConduit.name=Low Voltage Cable
