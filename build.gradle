@@ -15,13 +15,13 @@ version = "0.0.1"
 group = "com.artillect.voltaics" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "voltaics"
 
-sourceCompatibility = targetCompatibility = '1.12' // Need this here so eclipse task generates correctly.
+sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 compileJava {
-    sourceCompatibility = targetCompatibility = '1.12'
+    sourceCompatibility = targetCompatibility = '1.8'
 }
 
 minecraft {
-    version = "1.12-14.23.3.2698"
+    version = "1.12.2-14.23.3.2698"
     runDir = "run"
     
     // the mappings can be changed at any time, and must be in the following format.
