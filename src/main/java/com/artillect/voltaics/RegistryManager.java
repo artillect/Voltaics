@@ -19,7 +19,6 @@ import com.artillect.voltaics.item.ItemVoltmeter;
 
 
 import com.artillect.voltaics.tileentity.TileEntityInductor;
-//import com.artillect.voltaics.tileentity.TileEntityInductor;
 import com.artillect.voltaics.tileentity.TileEntityLowVoltageConduit;
 import com.artillect.voltaics.tileentity.TileEntityVoltaicPile;
 import com.artillect.voltaics.block.BlockCopperOre;

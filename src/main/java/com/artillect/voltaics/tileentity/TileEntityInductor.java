@@ -58,9 +58,11 @@ public class TileEntityInductor extends TileEntity implements ITickable {
     @Override
     public void update() {
     	//this.container.givePower(JouleUtils.consumePowerFromAllFaces(this.getWorld(), pos, Math.min(this.container.getCapacity()-this.container.getStoredPower(), this.container.getInputRate()), false), false);
-    	if (this.container.getStoredPower() >= 50) {
+    	/* if (this.container.getStoredPower() >= 50) {
     		this.container.takePower(50, false);
     		this.container.giveHeat(1, false);
-    	}
+    	} */
+    	
+    	if ()
     }
 }
