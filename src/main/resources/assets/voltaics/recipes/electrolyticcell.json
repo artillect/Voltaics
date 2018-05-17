@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" C ",
+		"WPS",
+		" Z "
+	],
+	"key": {
+		"C": {
+			"item": "voltaics:plateCopper"
+		},
+		"W": {
+			"item": "minecraft:water_bucket"
+		},
+		"P": {
+			"item": "minecraft:paper"
+		},
+		"S": {
+			"item": "voltaics:dustSalt"
+		},
+		"Z": {
+			"item": "voltaics:plateZinc"
+		}
+	},
+	"result": {
+		"item": "voltaics:electrolyticCell"
+	}
+}

@@ -10,8 +10,12 @@ import com.artillect.voltaics.block.BlockVoltaicPile;
 import com.artillect.voltaics.block.BlockZincOre;
 import com.artillect.voltaics.block.IModeledBlock;
 import com.artillect.voltaics.item.IModeledItem;
+import com.artillect.voltaics.item.ItemDustSalt;
+import com.artillect.voltaics.item.ItemElectrolyticCell;
 import com.artillect.voltaics.item.ItemHammer;
 import com.artillect.voltaics.item.ItemIngotCopper;
+import com.artillect.voltaics.item.ItemPlateCopper;
+import com.artillect.voltaics.item.ItemPlateZinc;
 import com.artillect.voltaics.item.ItemThermometer;
 import com.artillect.voltaics.item.ItemVoltmeter;
 import com.artillect.voltaics.tileentity.TileEntityHeatingCoil;
@@ -31,13 +35,17 @@ import net.minecraftforge.oredict.OreDictionary;
 public class RegistryManager {
 	public static ArrayList<Block> blocks = new ArrayList<Block>();
 	public static ArrayList<Item> items = new ArrayList<Item>();
-	public static Item voltmeter, hammer, ingotCopper, thermometer;
+	public static Item voltmeter, hammer, plateCopper, ingotCopper, plateZinc, electrolyticCell, dustSalt, thermometer;
 	public static Block voltaicPile, lowVoltageConduit, heatingCoil, copperOre, zincOre, heatingChamber;
 	
 	public static void registerAll(){
 		//register items
 		items.add(voltmeter = new ItemVoltmeter());
+		items.add(plateCopper = new ItemPlateCopper());
 		items.add(ingotCopper = new ItemIngotCopper());
+		items.add(plateZinc = new ItemPlateZinc());
+		items.add(electrolyticCell = new ItemElectrolyticCell());
+		items.add(dustSalt = new ItemDustSalt());
 		items.add(hammer = new ItemHammer());
 		items.add(thermometer = new ItemThermometer());
 		

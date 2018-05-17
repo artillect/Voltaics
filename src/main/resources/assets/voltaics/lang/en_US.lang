@@ -4,6 +4,10 @@ item.voltaics.voltmeter.name=Voltmeter
 item.voltaics.thermometer.name=Thermometer
 item.voltaics.hammer.name=Hammer
 item.voltaics.ingotCopper.name=Copper Ingot
+item.voltaics.plateCopper.name=Copper Plate
+item.voltaics.plateZinc.name=Zinc Plate
+item.voltaics.electrolyticCell.name=Electrolytic Cell
+item.voltaics.dustSalt.name=Salt Pile
 
 tile.voltaics.copperOre.name=Copper Ore
 tile.voltaics.zincOre.name=Zinc Ore
