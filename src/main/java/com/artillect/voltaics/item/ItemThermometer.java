@@ -18,6 +18,7 @@ public class ItemThermometer extends ItemBase {
 		this.setMaxStackSize(1);
 	}
 	
+	//Get temperature of block through CAPABILITY_HEAT on facing, otherwise return failure
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (worldIn.isRemote) return EnumActionResult.PASS;

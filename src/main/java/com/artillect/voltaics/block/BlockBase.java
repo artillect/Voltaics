@@ -17,11 +17,11 @@ public class BlockBase extends Block implements IModeledBlock {
 	public BlockRenderLayer layer = BlockRenderLayer.SOLID;
 	
 	//Constructor that sets name-related properties
-	public BlockBase(Material material, String name, boolean addToTab){
+	public BlockBase(Material material, String name, boolean addToTab) {
 		super(material);
 		setUnlocalizedName(Voltaics.modId+"."+name);
 		setRegistryName(Voltaics.modId+":"+name);
-		if (addToTab){
+		if (addToTab) {
 			setCreativeTab(Voltaics.creativeTab);
 		}
 		GameRegistry.register(this);
@@ -29,34 +29,34 @@ public class BlockBase extends Block implements IModeledBlock {
     }
 	
 	//Setting and checking opacity and solidness
-	public BlockBase setIsOpaqueCube(boolean b){
+	public BlockBase setIsOpaqueCube(boolean b) {
 		isOpaqueCube = b;
 		return this;
 	}
 	
 	@Override
-	public boolean isOpaqueCube(IBlockState state){
+	public boolean isOpaqueCube(IBlockState state) {
 		return isOpaqueCube;
 	}
 	
-	public BlockBase setIsFullCube(boolean b){
+	public BlockBase setIsFullCube(boolean b) {
 		isFullCube = b;
 		return this;
 	}
 	
 	@Override
-	public boolean isFullCube(IBlockState state){
+	public boolean isFullCube(IBlockState state) {
 		return isFullCube;
 	}
 	
-	public BlockBase setHarvestProperties(String toolType, int level){
+	public BlockBase setHarvestProperties(String toolType, int level) {
 		super.setHarvestLevel(toolType, level);
 		return this;
 	}
 	
 	//Set block model
 	@Override
-	public void initModel(){
+	public void initModel() {
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName().toString(),"inventory"));
 	}
 

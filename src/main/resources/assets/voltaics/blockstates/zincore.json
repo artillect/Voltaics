@@ -2,7 +2,7 @@
 	"forge_marker": 1,
 	"defaults": {
 		"textures": {
-			"all": "voltaics:blocks/zincore"
+			"all": "voltaics:blocks/zinc_ore"
 		}
 	},
 	"variants": {

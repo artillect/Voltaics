@@ -1,12 +1,12 @@
 {
   "parent": "block/orientable",
   "textures": {
-    "particle": "voltaics:blocks/heatingcoilleftside",
-    "down": "voltaics:blocks/ironmachinebottom",
-    "up": "voltaics:blocks/heatingcoiltop",
-    "east": "voltaics:blocks/heatingcoilleftside",
-    "west": "voltaics:blocks/heatingcoilrightside",
-    "north": "voltaics:blocks/heatingcoilfront",
-    "south": "voltaics:blocks/heatingcoilback"
+    "particle": "voltaics:blocks/heating_coil_left_side",
+    "down": "voltaics:blocks/iron_machine_bottom",
+    "up": "voltaics:blocks/heating_coil_top",
+    "east": "voltaics:blocks/heating_coil_left_side",
+    "west": "voltaics:blocks/heating_coil_right_side",
+    "north": "voltaics:blocks/heating_coil_front",
+    "south": "voltaics:blocks/heating_coil_back"
   }
 }
