@@ -10,12 +10,8 @@ import com.artillect.voltaics.block.BlockVoltaicPile;
 import com.artillect.voltaics.block.BlockZincOre;
 import com.artillect.voltaics.block.IModeledBlock;
 import com.artillect.voltaics.item.IModeledItem;
-import com.artillect.voltaics.item.ItemDustSalt;
-import com.artillect.voltaics.item.ItemElectrolyticCell;
+import com.artillect.voltaics.item.ItemBase;
 import com.artillect.voltaics.item.ItemHammer;
-import com.artillect.voltaics.item.ItemIngotCopper;
-import com.artillect.voltaics.item.ItemPlateCopper;
-import com.artillect.voltaics.item.ItemPlateZinc;
 import com.artillect.voltaics.item.ItemThermometer;
 import com.artillect.voltaics.item.ItemVoltmeter;
 import com.artillect.voltaics.tileentity.TileEntityHeatingCoil;
@@ -41,11 +37,11 @@ public class RegistryManager {
 	public static void registerAll(){
 		//register items
 		items.add(voltmeter = new ItemVoltmeter());
-		items.add(plateCopper = new ItemPlateCopper());
-		items.add(ingotCopper = new ItemIngotCopper());
-		items.add(plateZinc = new ItemPlateZinc());
-		items.add(electrolyticCell = new ItemElectrolyticCell());
-		items.add(dustSalt = new ItemDustSalt());
+		items.add(plateCopper = new ItemBase("plateCopper", true));
+		items.add(ingotCopper = new ItemBase("ingotCopper", true));
+		items.add(plateZinc = new ItemBase("plateZinc", true));
+		items.add(electrolyticCell = new ItemBase("electrolyticCell", true));
+		items.add(dustSalt = new ItemBase("dustSalt", true));
 		items.add(hammer = new ItemHammer());
 		items.add(thermometer = new ItemThermometer());
 		
