@@ -20,6 +20,7 @@ public class TileEntityLowVoltageConduit extends TileEntity implements ITickable
 		this.container = new BaseEnergyContainer(0, 250, 50, 50);
 	}
 	
+	//Connections
 	public static enum EnumConduitConnection{
 		NONE, CONDUIT, BLOCK, LEVER
 	}
@@ -52,6 +53,7 @@ public class TileEntityLowVoltageConduit extends TileEntity implements ITickable
 
 	public EnumConduitConnection up = EnumConduitConnection.NONE, down = EnumConduitConnection.NONE, north = EnumConduitConnection.NONE, south = EnumConduitConnection.NONE, east = EnumConduitConnection.NONE, west = EnumConduitConnection.NONE;
 	
+	//Get and set NBT
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound){
 		super.writeToNBT(compound);
@@ -100,6 +102,7 @@ public class TileEntityLowVoltageConduit extends TileEntity implements ITickable
 		readFromNBT(pkt.getNbtCompound());
 	}
 	
+	//Get and check capabilities
     @Override
     @SuppressWarnings("unchecked")
     public <T> T getCapability (Capability<T> capability, EnumFacing facing) {
@@ -123,12 +126,14 @@ public class TileEntityLowVoltageConduit extends TileEntity implements ITickable
 	public void update() {
 		for (EnumFacing side : EnumFacing.values()) {
 			final TileEntity tile = this.getWorld().getTileEntity(pos.offset(side));
+			//Use this algorithm to balance across the power network
 			if (tile != null && tile instanceof TileEntityLowVoltageConduit) {
 				long takerStored = tile.getCapability(EnergyCapabilities.CAPABILITY_HOLDER, side).getStoredPower();
 				if (this.container.getStoredPower() > takerStored) {
 					this.container.takePower(tile.getCapability(EnergyCapabilities.CAPABILITY_CONSUMER, side).givePower(Math.min(50, (this.container.getStoredPower() + takerStored)/2 - takerStored), false), false);
 				}
 			} else 
+			//Use this algorithm to give power to adjacent blocks
 			if (tile != null && tile.hasCapability(EnergyCapabilities.CAPABILITY_CONSUMER, side)) {
 				long takerStored = tile.getCapability(EnergyCapabilities.CAPABILITY_HOLDER, side).getStoredPower();
 				long takerCapacity = tile.getCapability(EnergyCapabilities.CAPABILITY_HOLDER, side).getCapacity();

@@ -33,6 +33,7 @@ public class BlockVoltaicPile extends BlockTEBase {
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName(), "inventory"));
 	}
 	
+	//Update connected neighbors on harvest
 	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player){
 		if (world.getTileEntity(pos.up()) instanceof TileEntityLowVoltageConduit){
 			((TileEntityLowVoltageConduit)world.getTileEntity(pos.up())).updateNeighbors(world);

@@ -9,6 +9,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 import com.artillect.voltaics.Voltaics;
 
+//Inventory magic that I understand slightly more
 public class GuiHeatingChamber extends GuiContainer {
 
 	private InventoryPlayer playerInv;

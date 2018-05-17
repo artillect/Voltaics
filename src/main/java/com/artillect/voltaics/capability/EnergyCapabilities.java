@@ -30,6 +30,7 @@ public class EnergyCapabilities {
     @CapabilityInject(IEnergyHolder.class)
     public static Capability<IEnergyHolder> CAPABILITY_HOLDER = null;
     
+    //Capability Magic
     public static class CapabilityJouleConsumer<T extends IEnergyConsumer> implements IStorage<IEnergyConsumer> {
         
         @Override

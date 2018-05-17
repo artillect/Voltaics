@@ -14,6 +14,7 @@ import net.minecraftforge.items.SlotItemHandler;
 public class ContainerHeatingChamber extends Container {
 
 	public ContainerHeatingChamber(InventoryPlayer playerInv, final TileEntityHeatingChamber heatingChamber) {
+		//Inventory magic that I don't entirely understand but it works
 		IItemHandler inventory = heatingChamber.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);
 		addSlotToContainer(new SlotItemHandler(inventory, 0, 20, 35) {
 			@Override

@@ -22,7 +22,8 @@ public class BlockHeatingCoil extends BlockTEBase{
 		super(material, name, addToTab);
 		 setDefaultState(blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
 	}
-
+	
+	//Get and set facing, blockstate magic
     @Override
     public IBlockState getStateFromMeta(int meta) {
         return getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));

@@ -61,11 +61,14 @@ public class TileEntityHeatingCoil extends TileEntity implements ITickable {
 
     @Override
     public void update() {
+    	//Take energy from internal energy buffer and create heat based on temperature
+    	//TODO: Balance resistance change based on temperature so it hits a true maximum when heating while fully insulated
     	if (this.container.getStoredPower() >= 50) {
     		this.container.takePower(50, false);
     		this.container.giveHeat(1/(1+0.00393*(this.container.getTemperature()-20)), false);
     	}
 
+    	//Lose heat to environment
     	double lostHeat = 0;
     	double lostDegrees = 0;
         for (final EnumFacing side : EnumFacing.values()) {

@@ -21,6 +21,7 @@ public class TileEntityHeatingChamber extends TileEntity implements ITickable {
 		this.container = new BaseHeatMachine(0, 1000, 50, 50, 20, 1200);
 	}
 	
+	//Get and set NBT
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		inventory.deserializeNBT(compound.getCompoundTag("inventory"));
@@ -38,7 +39,8 @@ public class TileEntityHeatingChamber extends TileEntity implements ITickable {
 	public NBTTagCompound getUpdateTag() {
 		return writeToNBT(new NBTTagCompound());
 	}
-
+	
+	//Get and check capabilities based on sidedness
     @Override
     @SuppressWarnings("unchecked")
     public <T> T getCapability (Capability<T> capability, EnumFacing facing) {
@@ -64,6 +66,7 @@ public class TileEntityHeatingChamber extends TileEntity implements ITickable {
 	
 	@Override
 	public void update() {
+		//For each side take heat from blocks with CAPABILITY_HEAT
 		for (EnumFacing side : EnumFacing.values()) {
 			final TileEntity tile = this.getWorld().getTileEntity(pos.offset(side));
 			if (tile != null && tile.hasCapability(HeatCapabilities.CAPABILITY_HEAT,side)) {

@@ -17,6 +17,7 @@ public class ItemVoltmeter extends ItemBase {
 		this.setMaxStackSize(1);
 	}
 	
+	//Get stored energy and max storage on use, otherwise return fail
 	@Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) return EnumActionResult.FAIL;

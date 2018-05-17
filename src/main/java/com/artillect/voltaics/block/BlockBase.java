@@ -15,6 +15,8 @@ public class BlockBase extends Block implements IModeledBlock {
 	public Item itemBlock = null;
 	public boolean isOpaqueCube = true, isFullCube = true;
 	public BlockRenderLayer layer = BlockRenderLayer.SOLID;
+	
+	//Constructor that sets name-related properties
 	public BlockBase(Material material, String name, boolean addToTab){
 		super(material);
 		setUnlocalizedName(Voltaics.modId+"."+name);
@@ -26,6 +28,7 @@ public class BlockBase extends Block implements IModeledBlock {
         GameRegistry.register(itemBlock = (new ItemBlock(this).setRegistryName(this.getRegistryName() + "inventory")));
     }
 	
+	//Setting and checking opacity and solidness
 	public BlockBase setIsOpaqueCube(boolean b){
 		isOpaqueCube = b;
 		return this;
@@ -51,6 +54,7 @@ public class BlockBase extends Block implements IModeledBlock {
 		return this;
 	}
 	
+	//Set block model
 	@Override
 	public void initModel(){
 		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(this), 0, new ModelResourceLocation(getRegistryName().toString(),"inventory"));

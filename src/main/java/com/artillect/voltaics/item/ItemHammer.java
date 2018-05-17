@@ -15,6 +15,7 @@ public class ItemHammer extends ItemBase{
 		this.setMaxStackSize(1);
 	}
 	
+	//Rotate block when used on block
 	@Override
     public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!worldIn.isRemote) {
