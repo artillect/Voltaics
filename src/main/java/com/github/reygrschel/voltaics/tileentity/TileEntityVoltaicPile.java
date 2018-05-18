@@ -14,7 +14,7 @@ public class TileEntityVoltaicPile extends TileEntity implements ITickable {
 	private BaseEnergyContainer container;
 	
 	public TileEntityVoltaicPile() {
-		this.container = new BaseEnergyContainer(20000, 20000, 50, 50);
+		this.container = new BaseEnergyContainer(20000, 20000, 50, 50, 20, 1200);
 	}
 	
 	@Override

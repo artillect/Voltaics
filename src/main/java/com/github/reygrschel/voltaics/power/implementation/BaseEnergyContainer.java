@@ -3,6 +3,7 @@ package com.github.reygrschel.voltaics.power.implementation;
 import com.github.reygrschel.voltaics.power.IEnergyConsumer;
 import com.github.reygrschel.voltaics.power.IEnergyHolder;
 import com.github.reygrschel.voltaics.power.IEnergyProducer;
+import com.github.reygrschel.voltaics.power.IHeat;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -12,7 +13,7 @@ import net.minecraftforge.common.util.INBTSerializable;
  * implementations do not need to use all three. The INBTSerializable interface is also
  * optional.
  */
-public class BaseEnergyContainer implements IEnergyConsumer, IEnergyProducer, IEnergyHolder, INBTSerializable<NBTTagCompound> {
+public class BaseEnergyContainer implements IEnergyConsumer, IEnergyProducer, IEnergyHolder, IHeat, INBTSerializable<NBTTagCompound> {
     
     /**
      * The amount of stored Joule power.
@@ -34,27 +35,9 @@ public class BaseEnergyContainer implements IEnergyConsumer, IEnergyProducer, IE
      */
     private long outputRate;
     
-    /**
-     * Default constructor. Sets capacity to 5000 and transfer rate to 50. This constructor
-     * will not set the amount of stored power. These values are arbitrary and should not be
-     * taken as a base line for balancing.
-     */
-    public BaseEnergyContainer() {
-        
-        this(5000, 50, 50);
-    }
+    private double temperature;
     
-    /**
-     * Constructor for setting the basic values. Will not construct with any stored power.
-     * 
-     * @param capacity The maximum amount of Joule power that the container should hold.
-     * @param input The maximum rate of power that can be accepted at a time.
-     * @param output The maximum rate of power that can be extracted at a time.
-     */
-    public BaseEnergyContainer(long capacity, long input, long output) {
-        
-        this(0, capacity, input, output);
-    }
+    private double meltingPoint;
     
     /**
      * Constructor for setting all of the base values, including the stored power.
@@ -63,13 +46,19 @@ public class BaseEnergyContainer implements IEnergyConsumer, IEnergyProducer, IE
      * @param capacity The maximum amount of Joule power that the container should hold.
      * @param input The maximum rate of power that can be accepted at a time.
      * @param output The maximum rate of power that can be extracted at a time.
+     * @param j 
+     * @param i 
+     * @param j 
+     * @param i 
      */
-    public BaseEnergyContainer(long power, long capacity, long input, long output) {
+    public BaseEnergyContainer(long power, long capacity, long input, long output, double temperature, double meltingPoint) {
         
         this.stored = power;
         this.capacity = capacity;
         this.inputRate = input;
         this.outputRate = output;
+        this.temperature = temperature;
+        this.meltingPoint = meltingPoint;
     }
     
     /**
@@ -223,4 +212,34 @@ public class BaseEnergyContainer implements IEnergyConsumer, IEnergyProducer, IE
         this.setOutputRate(rate);
         return this;
     }
+    
+
+    @Override
+    public double getTemperature () {
+    	return this.temperature;
+    }
+    
+    @Override
+    public double getMeltingPoint () {
+    	return this.meltingPoint;
+    }
+    
+    @Override
+    public double giveHeat (double heat, boolean simulated) {
+        final double acceptedHeat = heat;
+        
+        if (!simulated)
+            this.temperature += acceptedHeat;
+            
+        return acceptedHeat;
+    }
+    
+	@Override
+	public double takeHeat(double lostDegrees, boolean simulated) {
+		final double takenHeat = lostDegrees;
+		
+		if (!simulated)
+			this.temperature -= takenHeat;
+		return takenHeat;
+	}
 }

@@ -1,7 +1,7 @@
 package com.github.reygrschel.voltaics.tileentity;
 
 import com.github.reygrschel.voltaics.capability.Capabilities;
-import com.github.reygrschel.voltaics.power.implementation.BaseHeatMachine;
+import com.github.reygrschel.voltaics.power.implementation.BaseEnergyContainer;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -13,16 +13,16 @@ import net.minecraftforge.common.capabilities.Capability;
 
 public class TileEntityHeatingCoil extends TileEntity implements ITickable {
 
-	private BaseHeatMachine container;
+	private BaseEnergyContainer container;
 	
 	public TileEntityHeatingCoil() {
-		this.container = new BaseHeatMachine(0, 1000, 50, 50, 20, 1200);
+		this.container = new BaseEnergyContainer(0, 1000, 50, 50, 20, 1200);
 	}
 	
 	@Override
 	public void readFromNBT(NBTTagCompound compound) {
 		super.readFromNBT(compound);
-		this.container = new BaseHeatMachine(compound.getCompoundTag("HeatContainer"));
+		this.container = new BaseEnergyContainer(compound.getCompoundTag("HeatContainer"));
 	}
 	
 	@Override

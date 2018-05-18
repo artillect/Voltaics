@@ -27,28 +27,10 @@ public class BaseEnergyMachine implements IEnergyConsumer, IEnergyHolder, INBTSe
      * The maximum amount of Joule power that can be extracted
      */
     private long outputRate;
-    
-    /**
-     * Default constructor. Sets capacity to 5000 and transfer rate to 50. This constructor
-     * will not set the amount of stored power. These values are arbitrary and should not be
-     * taken as a base line for balancing.
-     */
-    public BaseEnergyMachine() {
-        
-        this(5000, 50, 50);
-    }
-    
-    /**
-     * Constructor for setting the basic values. Will not construct with any stored power.
-     * 
-     * @param capacity The maximum amount of Joule power that the Machine should hold.
-     * @param input The maximum rate of power that can be accepted at a time.
-     * @param output The maximum rate of power that can be extracted at a time.
-     */
-    public BaseEnergyMachine(long capacity, long input, long output) {
-        
-        this(0, capacity, input, output);
-    }
+
+	private double temperature;
+
+	private double meltingPoint;
     
     /**
      * Constructor for setting all of the base values, including the stored power.
@@ -57,13 +39,17 @@ public class BaseEnergyMachine implements IEnergyConsumer, IEnergyHolder, INBTSe
      * @param capacity The maximum amount of Joule power that the Machine should hold.
      * @param input The maximum rate of power that can be accepted at a time.
      * @param output The maximum rate of power that can be extracted at a time.
+     * @param j 
+     * @param i 
      */
-    public BaseEnergyMachine(long power, long capacity, long input, long output) {
+    public BaseEnergyMachine(long power, long capacity, long input, long output, double temperature, double meltingPoint) {
         
         this.stored = power;
         this.capacity = capacity;
         this.inputRate = input;
         this.outputRate = output;
+        this.temperature = temperature;
+        this.meltingPoint = meltingPoint;
     }
     
     /**
@@ -111,6 +97,8 @@ public class BaseEnergyMachine implements IEnergyConsumer, IEnergyHolder, INBTSe
         dataTag.setLong("JouleCapacity", this.capacity);
         dataTag.setLong("JouleInput", this.inputRate);
         dataTag.setLong("JouleOutput", this.outputRate);
+        dataTag.setDouble("HeatTemperature", this.temperature);
+        dataTag.setDouble("HeatMeltingPoint", this.meltingPoint);
         
         return dataTag;
     }
@@ -128,6 +116,12 @@ public class BaseEnergyMachine implements IEnergyConsumer, IEnergyHolder, INBTSe
             
         if (nbt.hasKey("JouleOutput"))
             this.outputRate = nbt.getLong("JouleOutput");
+        
+        if (nbt.hasKey("HeatTemperature"))
+            this.temperature = nbt.getDouble("HeatTemperature");
+        
+        if (nbt.hasKey("HeatMeltingPoint"))
+            this.meltingPoint = nbt.getDouble("HeatMeltingPoint");
             
         if (this.stored > this.getCapacity())
             this.stored = this.getCapacity();

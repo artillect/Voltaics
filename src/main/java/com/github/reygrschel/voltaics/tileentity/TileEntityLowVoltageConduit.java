@@ -19,7 +19,7 @@ public class TileEntityLowVoltageConduit extends TileEntity implements ITickable
 	private BaseEnergyContainer container;
 	
 	public TileEntityLowVoltageConduit() {
-		this.container = new BaseEnergyContainer(0, 250, 50, 50);
+		this.container = new BaseEnergyContainer(0, 250, 50, 50, 20, 1200);
 	}
 	
 	//Connections
