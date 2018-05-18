@@ -2,7 +2,6 @@ package com.github.reygrschel.voltaics.proxy;
 
 import com.github.reygrschel.voltaics.RegistryManager;
 
-import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ClientProxy extends CommonProxy {

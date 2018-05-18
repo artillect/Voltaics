@@ -2,7 +2,6 @@ package com.github.reygrschel.voltaics.power.implementation;
 
 import com.github.reygrschel.voltaics.power.IEnergyConsumer;
 import com.github.reygrschel.voltaics.power.IEnergyHolder;
-import com.github.reygrschel.voltaics.power.IEnergyProducer;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.INBTSerializable;

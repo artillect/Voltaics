@@ -2,7 +2,6 @@ package com.github.reygrschel.voltaics.gui;
 
 import com.github.reygrschel.voltaics.Voltaics;
 
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;

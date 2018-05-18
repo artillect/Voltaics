@@ -6,7 +6,6 @@ import com.github.reygrschel.voltaics.power.IEnergyProducer;
 import com.github.reygrschel.voltaics.power.IHeat;
 
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.INBTSerializable;
 
 /**

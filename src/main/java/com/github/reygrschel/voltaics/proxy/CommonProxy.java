@@ -2,7 +2,6 @@ package com.github.reygrschel.voltaics.proxy;
 
 import com.github.reygrschel.voltaics.RegistryManager;
 
-import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;

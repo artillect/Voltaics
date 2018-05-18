@@ -2,10 +2,6 @@ package com.github.reygrschel.voltaics.tileentity;
 
 import com.github.reygrschel.voltaics.capability.EnergyCapabilities;
 import com.github.reygrschel.voltaics.capability.HeatCapabilities;
-import com.github.reygrschel.voltaics.lib.JouleUtils;
-import com.github.reygrschel.voltaics.power.IEnergyConsumer;
-import com.github.reygrschel.voltaics.power.IHeat;
-import com.github.reygrschel.voltaics.power.implementation.BaseEnergyContainer;
 import com.github.reygrschel.voltaics.power.implementation.BaseHeatMachine;
 
 import net.minecraft.block.Block;
