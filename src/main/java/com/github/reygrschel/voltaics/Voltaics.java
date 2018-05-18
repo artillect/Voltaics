@@ -37,7 +37,7 @@ public class Voltaics {
 
 	}
 	
-	@SidedProxy(serverSide = "com.artillect.voltaics.proxy.CommonProxy", clientSide = "com.artillect.voltaics.proxy.ClientProxy")
+	@SidedProxy(serverSide = "com.github.reygrschel.voltaics.proxy.CommonProxy", clientSide = "com.github.reygrschel.voltaics.proxy.ClientProxy")
 	public static CommonProxy proxy;
 	public static final VoltaicsTab creativeTab = new VoltaicsTab();
 }
