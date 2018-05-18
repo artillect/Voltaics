@@ -1,6 +1,6 @@
 package com.github.reygrschel.voltaics.power.implementation;
 
-import com.github.reygrschel.voltaics.capability.EnergyCapabilities;
+import com.github.reygrschel.voltaics.capability.Capabilities;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -31,14 +31,14 @@ public class BaseEnergyContainerProvider implements INBTSerializable<NBTTagCompo
     @Override
     public boolean hasCapability (Capability<?> capability, EnumFacing facing) {
         
-        return capability == EnergyCapabilities.CAPABILITY_CONSUMER || capability == EnergyCapabilities.CAPABILITY_PRODUCER || capability == EnergyCapabilities.CAPABILITY_HOLDER;
+        return capability == Capabilities.CAPABILITY_CONSUMER || capability == Capabilities.CAPABILITY_PRODUCER || capability == Capabilities.CAPABILITY_HOLDER;
     }
     
     @Override
     @SuppressWarnings("unchecked")
     public <T> T getCapability (Capability<T> capability, EnumFacing facing) {
         
-        if (capability == EnergyCapabilities.CAPABILITY_CONSUMER || capability == EnergyCapabilities.CAPABILITY_PRODUCER || capability == EnergyCapabilities.CAPABILITY_HOLDER)
+        if (capability == Capabilities.CAPABILITY_CONSUMER || capability == Capabilities.CAPABILITY_PRODUCER || capability == Capabilities.CAPABILITY_HOLDER)
             return (T) this.container;
             
         return null;

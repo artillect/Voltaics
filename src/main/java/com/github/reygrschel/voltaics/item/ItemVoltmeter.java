@@ -1,6 +1,6 @@
 package com.github.reygrschel.voltaics.item;
 
-import com.github.reygrschel.voltaics.capability.EnergyCapabilities;
+import com.github.reygrschel.voltaics.capability.Capabilities;
 import com.github.reygrschel.voltaics.power.IEnergyHolder;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,9 +25,9 @@ public class ItemVoltmeter extends ItemBase {
 		TileEntity te = worldIn.getTileEntity(pos);
 		if (te == null) return EnumActionResult.FAIL;
 
-		if (!te.hasCapability(EnergyCapabilities.CAPABILITY_HOLDER, facing)) return EnumActionResult.FAIL;
+		if (!te.hasCapability(Capabilities.CAPABILITY_HOLDER, facing)) return EnumActionResult.FAIL;
 
-		IEnergyHolder energyBuffer = te.getCapability(EnergyCapabilities.CAPABILITY_HOLDER, facing);
+		IEnergyHolder energyBuffer = te.getCapability(Capabilities.CAPABILITY_HOLDER, facing);
 		
 		double storedEnergy = energyBuffer.getStoredPower();
 		double maxStoredEnergy = energyBuffer.getCapacity();		

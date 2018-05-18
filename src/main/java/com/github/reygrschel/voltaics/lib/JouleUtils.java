@@ -3,7 +3,7 @@ package com.github.reygrschel.voltaics.lib;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.reygrschel.voltaics.capability.EnergyCapabilities;
+import com.github.reygrschel.voltaics.capability.Capabilities;
 import com.github.reygrschel.voltaics.power.IEnergyConsumer;
 import com.github.reygrschel.voltaics.power.IEnergyHolder;
 import com.github.reygrschel.voltaics.power.IEnergyProducer;
@@ -134,7 +134,7 @@ public class JouleUtils {
      */
     public static boolean isJouleHolder (ICapabilityProvider provider, EnumFacing side) {
         
-        return provider.hasCapability(EnergyCapabilities.CAPABILITY_HOLDER, side);
+        return provider.hasCapability(Capabilities.CAPABILITY_HOLDER, side);
     }
     
     /**
@@ -146,7 +146,7 @@ public class JouleUtils {
      */
     public static boolean isJouleConsumer (ICapabilityProvider provider, EnumFacing side) {
         
-        return provider.hasCapability(EnergyCapabilities.CAPABILITY_CONSUMER, side);
+        return provider.hasCapability(Capabilities.CAPABILITY_CONSUMER, side);
     }
     
     /**
@@ -158,7 +158,7 @@ public class JouleUtils {
      */
     public static boolean isJouleProducer (ICapabilityProvider provider, EnumFacing side) {
         
-        return provider.hasCapability(EnergyCapabilities.CAPABILITY_PRODUCER, side);
+        return provider.hasCapability(Capabilities.CAPABILITY_PRODUCER, side);
     }
     
     /**
@@ -170,7 +170,7 @@ public class JouleUtils {
      */
     public static IEnergyHolder getJouleHolder (ICapabilityProvider provider, EnumFacing side) {
         
-        return (IEnergyHolder) provider.getCapability(EnergyCapabilities.CAPABILITY_HOLDER, side);
+        return (IEnergyHolder) provider.getCapability(Capabilities.CAPABILITY_HOLDER, side);
     }
     
     /**
@@ -182,7 +182,7 @@ public class JouleUtils {
      */
     public static IEnergyConsumer getJouleConsumer (ICapabilityProvider provider, EnumFacing side) {
         
-        return (IEnergyConsumer) provider.getCapability(EnergyCapabilities.CAPABILITY_CONSUMER, side);
+        return (IEnergyConsumer) provider.getCapability(Capabilities.CAPABILITY_CONSUMER, side);
     }
     
     /**
@@ -194,7 +194,7 @@ public class JouleUtils {
      */
     public static IEnergyProducer getJouleProducer (ICapabilityProvider provider, EnumFacing side) {
         
-        return (IEnergyProducer) provider.getCapability(EnergyCapabilities.CAPABILITY_PRODUCER, side);
+        return (IEnergyProducer) provider.getCapability(Capabilities.CAPABILITY_PRODUCER, side);
     }
     
     /**
@@ -284,7 +284,7 @@ public class JouleUtils {
         
         long consumedPower = 0L;
         
-        for (final IEnergyConsumer consumer : getConnectedCapabilities(EnergyCapabilities.CAPABILITY_CONSUMER, world, pos))
+        for (final IEnergyConsumer consumer : getConnectedCapabilities(Capabilities.CAPABILITY_CONSUMER, world, pos))
             consumedPower += consumer.givePower(amount, simulated);
             
         return consumedPower;
@@ -303,7 +303,7 @@ public class JouleUtils {
         
         long recievedPower = 0L;
         
-        for (final IEnergyProducer producer : getConnectedCapabilities(EnergyCapabilities.CAPABILITY_PRODUCER, world, pos))
+        for (final IEnergyProducer producer : getConnectedCapabilities(Capabilities.CAPABILITY_PRODUCER, world, pos))
             recievedPower += producer.takePower(amount, simulated);
             
         return recievedPower;
@@ -317,7 +317,7 @@ public class JouleUtils {
      */
     public static boolean isHolderCapability (Capability<?> capability) {
         
-        return capability == EnergyCapabilities.CAPABILITY_HOLDER;
+        return capability == Capabilities.CAPABILITY_HOLDER;
     }
     
     /**
@@ -328,7 +328,7 @@ public class JouleUtils {
      */
     public static boolean isConsumerCapability (Capability<?> capability) {
         
-        return capability == EnergyCapabilities.CAPABILITY_CONSUMER;
+        return capability == Capabilities.CAPABILITY_CONSUMER;
     }
     
     /**
@@ -339,7 +339,7 @@ public class JouleUtils {
      */
     public static boolean isProducerCapability (Capability<?> capability) {
         
-        return capability == EnergyCapabilities.CAPABILITY_PRODUCER;
+        return capability == Capabilities.CAPABILITY_PRODUCER;
     }
     
     /**

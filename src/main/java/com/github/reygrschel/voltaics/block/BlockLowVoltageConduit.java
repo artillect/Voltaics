@@ -1,6 +1,6 @@
 package com.github.reygrschel.voltaics.block;
 
-import com.github.reygrschel.voltaics.capability.EnergyCapabilities;
+import com.github.reygrschel.voltaics.capability.Capabilities;
 import com.github.reygrschel.voltaics.tileentity.TileEntityLowVoltageConduit;
 
 import net.minecraft.block.material.Material;
@@ -165,7 +165,7 @@ public class BlockLowVoltageConduit extends BlockTEBase implements IModeledBlock
         if (te == null) {
         	return false;
         }
-        return (te instanceof TileEntityLowVoltageConduit) || (te.hasCapability(EnergyCapabilities.CAPABILITY_HOLDER, direction.getOpposite()));
+        return (te instanceof TileEntityLowVoltageConduit) || (te.hasCapability(Capabilities.CAPABILITY_HOLDER, direction.getOpposite()));
     }
     
     @Override

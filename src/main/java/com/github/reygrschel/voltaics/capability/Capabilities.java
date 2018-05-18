@@ -3,6 +3,7 @@ package com.github.reygrschel.voltaics.capability;
 import com.github.reygrschel.voltaics.power.IEnergyConsumer;
 import com.github.reygrschel.voltaics.power.IEnergyHolder;
 import com.github.reygrschel.voltaics.power.IEnergyProducer;
+import com.github.reygrschel.voltaics.power.IHeat;
 
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
@@ -10,25 +11,33 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.Capability.IStorage;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 
-public class EnergyCapabilities {
+public class Capabilities {
     
-    /**
-     * Access to the consumer capability. Can be used for making checks.
-     */
     @CapabilityInject(IEnergyConsumer.class)
     public static Capability<IEnergyConsumer> CAPABILITY_CONSUMER = null;
-    
-    /**
-     * Access to the producer capability. Can be used for making checks.
-     */
+ 
     @CapabilityInject(IEnergyProducer.class)
     public static Capability<IEnergyProducer> CAPABILITY_PRODUCER = null;
     
-    /**
-     * Access to the holder capability. Can be used for making checks.
-     */
     @CapabilityInject(IEnergyHolder.class)
     public static Capability<IEnergyHolder> CAPABILITY_HOLDER = null;
+    
+    @CapabilityInject(IHeat.class)
+    public static Capability<IHeat> CAPABILITY_HEAT = null;
+    
+    public static class CapabilityHeat<T extends IHeat> implements IStorage<IHeat> {
+        
+        @Override
+        public NBTBase writeNBT (Capability<IHeat> capability, IHeat instance, EnumFacing side) {
+            
+            return null;
+        }
+        
+        @Override
+        public void readNBT (Capability<IHeat> capability, IHeat instance, EnumFacing side, NBTBase nbt) {
+        
+        }
+    }
     
     //Capability Magic
     public static class CapabilityJouleConsumer<T extends IEnergyConsumer> implements IStorage<IEnergyConsumer> {

@@ -15,7 +15,7 @@ public class Voltaics {
 
 	public static final String modId = "voltaics";
 	public static final String name = "Voltaics";
-	public static final String version = "1.0.0";
+	public static final String version = "0.0.1";
 
 	@Mod.Instance(modId)
 	public static Voltaics instance;

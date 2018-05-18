@@ -1,7 +1,6 @@
 package com.github.reygrschel.voltaics.tileentity;
 
-import com.github.reygrschel.voltaics.capability.EnergyCapabilities;
-import com.github.reygrschel.voltaics.capability.HeatCapabilities;
+import com.github.reygrschel.voltaics.capability.Capabilities;
 import com.github.reygrschel.voltaics.power.implementation.BaseHeatMachine;
 
 import net.minecraft.block.Block;
@@ -40,7 +39,7 @@ public class TileEntityHeatingCoil extends TileEntity implements ITickable {
     @SuppressWarnings("unchecked")
     public <T> T getCapability (Capability<T> capability, EnumFacing facing) {
 
-        if (capability == EnergyCapabilities.CAPABILITY_CONSUMER || capability == EnergyCapabilities.CAPABILITY_HOLDER)
+        if (capability == Capabilities.CAPABILITY_CONSUMER || capability == Capabilities.CAPABILITY_HOLDER)
             return (T) this.container;
             
         return super.getCapability(capability, facing);
@@ -49,7 +48,7 @@ public class TileEntityHeatingCoil extends TileEntity implements ITickable {
     @Override
     public boolean hasCapability (Capability<?> capability, EnumFacing facing) {
 
-        if (capability == EnergyCapabilities.CAPABILITY_CONSUMER || capability == EnergyCapabilities.CAPABILITY_HOLDER || capability == HeatCapabilities.CAPABILITY_HEAT)
+        if (capability == Capabilities.CAPABILITY_CONSUMER || capability == Capabilities.CAPABILITY_HOLDER || capability == Capabilities.CAPABILITY_HEAT)
             return true;
             
         return super.hasCapability(capability, facing);
@@ -69,7 +68,7 @@ public class TileEntityHeatingCoil extends TileEntity implements ITickable {
         for (final EnumFacing side : EnumFacing.values()) {
             final Block block = world.getBlockState(pos.offset(side)).getBlock();
             if (block == Blocks.AIR) {
-            	lostDegrees = 7.9*(this.getCapability(HeatCapabilities.CAPABILITY_HEAT, side).getTemperature() - 20)/4600;
+            	lostDegrees = 7.9*(this.getCapability(Capabilities.CAPABILITY_HEAT, side).getTemperature() - 20)/4600;
             	this.container.takeHeat(lostDegrees, false);
             }
         }

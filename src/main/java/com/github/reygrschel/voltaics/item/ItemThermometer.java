@@ -1,6 +1,6 @@
 package com.github.reygrschel.voltaics.item;
 
-import com.github.reygrschel.voltaics.capability.HeatCapabilities;
+import com.github.reygrschel.voltaics.capability.Capabilities;
 import com.github.reygrschel.voltaics.power.IHeat;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,9 +25,9 @@ public class ItemThermometer extends ItemBase {
 		TileEntity te = worldIn.getTileEntity(pos);
 		if (te == null) return EnumActionResult.PASS;
 
-		if (!te.hasCapability(HeatCapabilities.CAPABILITY_HEAT, facing)) return EnumActionResult.FAIL;
+		if (!te.hasCapability(Capabilities.CAPABILITY_HEAT, facing)) return EnumActionResult.FAIL;
 
-		IHeat heatBuffer = te.getCapability(HeatCapabilities.CAPABILITY_HEAT, facing);
+		IHeat heatBuffer = te.getCapability(Capabilities.CAPABILITY_HEAT, facing);
 		
 		int temperature = (int) heatBuffer.getTemperature();		
 		player.sendMessage(new TextComponentString("Temperature: "+temperature+" C"));

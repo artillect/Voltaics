@@ -1,7 +1,6 @@
 package com.github.reygrschel.voltaics.tileentity;
 
-import com.github.reygrschel.voltaics.capability.EnergyCapabilities;
-import com.github.reygrschel.voltaics.capability.HeatCapabilities;
+import com.github.reygrschel.voltaics.capability.Capabilities;
 import com.github.reygrschel.voltaics.power.implementation.BaseHeatMachine;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -45,7 +44,7 @@ public class TileEntityHeatingChamber extends TileEntity implements ITickable {
     @SuppressWarnings("unchecked")
     public <T> T getCapability (Capability<T> capability, EnumFacing facing) {
 
-        if (capability == EnergyCapabilities.CAPABILITY_CONSUMER || capability == EnergyCapabilities.CAPABILITY_HOLDER)
+        if (capability == Capabilities.CAPABILITY_CONSUMER || capability == Capabilities.CAPABILITY_HOLDER)
             return (T) this.container;
         else if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         	return (T) this.inventory;
@@ -56,7 +55,7 @@ public class TileEntityHeatingChamber extends TileEntity implements ITickable {
     @Override
     public boolean hasCapability (Capability<?> capability, EnumFacing facing) {
 
-        if (capability == EnergyCapabilities.CAPABILITY_CONSUMER || capability == EnergyCapabilities.CAPABILITY_HOLDER || capability == HeatCapabilities.CAPABILITY_HEAT)
+        if (capability == Capabilities.CAPABILITY_CONSUMER || capability == Capabilities.CAPABILITY_HOLDER || capability == Capabilities.CAPABILITY_HEAT)
             return true;
         else if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         	return true;
@@ -69,10 +68,10 @@ public class TileEntityHeatingChamber extends TileEntity implements ITickable {
 		//For each side take heat from blocks with CAPABILITY_HEAT
 		for (EnumFacing side : EnumFacing.values()) {
 			final TileEntity tile = this.getWorld().getTileEntity(pos.offset(side));
-			if (tile != null && tile.hasCapability(HeatCapabilities.CAPABILITY_HEAT,side)) {
-				double takenHeat = 7.9*(tile.getCapability(HeatCapabilities.CAPABILITY_HEAT, side.getOpposite()).getTemperature()-this.container.getTemperature());
+			if (tile != null && tile.hasCapability(Capabilities.CAPABILITY_HEAT,side)) {
+				double takenHeat = 7.9*(tile.getCapability(Capabilities.CAPABILITY_HEAT, side.getOpposite()).getTemperature()-this.container.getTemperature());
 				double takenDegrees = takenHeat/4600;
-				tile.getCapability(HeatCapabilities.CAPABILITY_HEAT, side).takeHeat(takenDegrees, false);
+				tile.getCapability(Capabilities.CAPABILITY_HEAT, side).takeHeat(takenDegrees, false);
 				this.container.giveHeat(takenDegrees, false);
 			}
 		}

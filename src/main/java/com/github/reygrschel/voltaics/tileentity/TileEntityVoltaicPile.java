@@ -1,6 +1,6 @@
 package com.github.reygrschel.voltaics.tileentity;
 
-import com.github.reygrschel.voltaics.capability.EnergyCapabilities;
+import com.github.reygrschel.voltaics.capability.Capabilities;
 import com.github.reygrschel.voltaics.power.implementation.BaseEnergyContainer;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -38,10 +38,10 @@ public class TileEntityVoltaicPile extends TileEntity implements ITickable {
     @SuppressWarnings("unchecked")
     public <T> T getCapability (Capability<T> capability, EnumFacing facing) {
 
-    	if ((capability == EnergyCapabilities.CAPABILITY_HOLDER || capability == EnergyCapabilities.CAPABILITY_PRODUCER) && facing == EnumFacing.UP) {
+    	if ((capability == Capabilities.CAPABILITY_HOLDER || capability == Capabilities.CAPABILITY_PRODUCER) && facing == EnumFacing.UP) {
 			return (T) this.container;
     	}
-    	else if ((capability == EnergyCapabilities.CAPABILITY_HOLDER || capability == EnergyCapabilities.CAPABILITY_CONSUMER) && facing == EnumFacing.DOWN) {
+    	else if ((capability == Capabilities.CAPABILITY_HOLDER || capability == Capabilities.CAPABILITY_CONSUMER) && facing == EnumFacing.DOWN) {
     		return (T) this.container;
     	}
             
@@ -51,10 +51,10 @@ public class TileEntityVoltaicPile extends TileEntity implements ITickable {
     @Override
     public boolean hasCapability (Capability<?> capability, EnumFacing facing) {
     	
-    	if ((capability == EnergyCapabilities.CAPABILITY_HOLDER || capability == EnergyCapabilities.CAPABILITY_PRODUCER) && facing == EnumFacing.UP) {
+    	if ((capability == Capabilities.CAPABILITY_HOLDER || capability == Capabilities.CAPABILITY_PRODUCER) && facing == EnumFacing.UP) {
 			return true;
     	}
-    	else if ((capability == EnergyCapabilities.CAPABILITY_HOLDER || capability == EnergyCapabilities.CAPABILITY_CONSUMER) && facing == EnumFacing.DOWN) {
+    	else if ((capability == Capabilities.CAPABILITY_HOLDER || capability == Capabilities.CAPABILITY_CONSUMER) && facing == EnumFacing.DOWN) {
     		return true;
     	}
     	else return false;    
@@ -64,15 +64,15 @@ public class TileEntityVoltaicPile extends TileEntity implements ITickable {
 	public void update() {
 		//Give power to tile entity above
 		TileEntity tile = this.getWorld().getTileEntity(pos.offset(EnumFacing.UP));
-		if (tile != null && tile.hasCapability(EnergyCapabilities.CAPABILITY_CONSUMER, EnumFacing.DOWN) && tile.hasCapability(EnergyCapabilities.CAPABILITY_HOLDER, EnumFacing.DOWN)) {
-			long takenPower = tile.getCapability(EnergyCapabilities.CAPABILITY_CONSUMER, EnumFacing.DOWN).givePower(Math.min(50, tile.getCapability(EnergyCapabilities.CAPABILITY_HOLDER, EnumFacing.DOWN).getCapacity()-tile.getCapability(EnergyCapabilities.CAPABILITY_HOLDER, EnumFacing.DOWN).getStoredPower()), false);
+		if (tile != null && tile.hasCapability(Capabilities.CAPABILITY_CONSUMER, EnumFacing.DOWN) && tile.hasCapability(Capabilities.CAPABILITY_HOLDER, EnumFacing.DOWN)) {
+			long takenPower = tile.getCapability(Capabilities.CAPABILITY_CONSUMER, EnumFacing.DOWN).givePower(Math.min(50, tile.getCapability(Capabilities.CAPABILITY_HOLDER, EnumFacing.DOWN).getCapacity()-tile.getCapability(Capabilities.CAPABILITY_HOLDER, EnumFacing.DOWN).getStoredPower()), false);
 			this.container.takePower(takenPower, false); //Replace 20 with JouleUtils.distributePowerToAllFaces(this.getWorld(), pos, 50, false)
 		}
 		
 		//Take power from tile entity below
 		tile = this.getWorld().getTileEntity(pos.offset(EnumFacing.DOWN));
-		if (tile != null && tile.hasCapability(EnergyCapabilities.CAPABILITY_PRODUCER, EnumFacing.UP) && tile.hasCapability(EnergyCapabilities.CAPABILITY_HOLDER, EnumFacing.UP)) {
-			long givenPower = tile.getCapability(EnergyCapabilities.CAPABILITY_PRODUCER, EnumFacing.UP).takePower(Math.min(50, Math.min(this.container.getCapacity()-this.container.getStoredPower(), tile.getCapability(EnergyCapabilities.CAPABILITY_HOLDER, EnumFacing.UP).getStoredPower())), false);
+		if (tile != null && tile.hasCapability(Capabilities.CAPABILITY_PRODUCER, EnumFacing.UP) && tile.hasCapability(Capabilities.CAPABILITY_HOLDER, EnumFacing.UP)) {
+			long givenPower = tile.getCapability(Capabilities.CAPABILITY_PRODUCER, EnumFacing.UP).takePower(Math.min(50, Math.min(this.container.getCapacity()-this.container.getStoredPower(), tile.getCapability(Capabilities.CAPABILITY_HOLDER, EnumFacing.UP).getStoredPower())), false);
 			this.container.givePower(givenPower, false);
 		}
 	}

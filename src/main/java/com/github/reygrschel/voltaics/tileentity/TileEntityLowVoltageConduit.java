@@ -2,7 +2,7 @@ package com.github.reygrschel.voltaics.tileentity;
 
 import javax.annotation.Nullable;
 
-import com.github.reygrschel.voltaics.capability.EnergyCapabilities;
+import com.github.reygrschel.voltaics.capability.Capabilities;
 import com.github.reygrschel.voltaics.power.implementation.BaseEnergyContainer;
 
 import net.minecraft.nbt.NBTTagCompound;
@@ -46,7 +46,7 @@ public class TileEntityLowVoltageConduit extends TileEntity implements ITickable
 			return EnumConduitConnection.CONDUIT;
 		}
 		else if (world.getTileEntity(pos) != null){
-			if (world.getTileEntity(pos).hasCapability(EnergyCapabilities.CAPABILITY_HOLDER, side)){
+			if (world.getTileEntity(pos).hasCapability(Capabilities.CAPABILITY_HOLDER, side)){
 				return EnumConduitConnection.BLOCK;
 			}
 		}
@@ -109,7 +109,7 @@ public class TileEntityLowVoltageConduit extends TileEntity implements ITickable
     @SuppressWarnings("unchecked")
     public <T> T getCapability (Capability<T> capability, EnumFacing facing) {
  
-        if (capability == EnergyCapabilities.CAPABILITY_CONSUMER || capability == EnergyCapabilities.CAPABILITY_PRODUCER || capability == EnergyCapabilities.CAPABILITY_HOLDER)
+        if (capability == Capabilities.CAPABILITY_CONSUMER || capability == Capabilities.CAPABILITY_PRODUCER || capability == Capabilities.CAPABILITY_HOLDER)
             return (T) this.container;
             
         return super.getCapability(capability, facing);
@@ -118,7 +118,7 @@ public class TileEntityLowVoltageConduit extends TileEntity implements ITickable
     @Override
     public boolean hasCapability (Capability<?> capability, EnumFacing facing) {
         
-        if (capability == EnergyCapabilities.CAPABILITY_CONSUMER || capability == EnergyCapabilities.CAPABILITY_PRODUCER || capability == EnergyCapabilities.CAPABILITY_HOLDER)
+        if (capability == Capabilities.CAPABILITY_CONSUMER || capability == Capabilities.CAPABILITY_PRODUCER || capability == Capabilities.CAPABILITY_HOLDER)
             return true;
             
         return super.hasCapability(capability, facing);
@@ -130,17 +130,17 @@ public class TileEntityLowVoltageConduit extends TileEntity implements ITickable
 			final TileEntity tile = this.getWorld().getTileEntity(pos.offset(side));
 			//Use this algorithm to balance across the power network
 			if (tile != null && tile instanceof TileEntityLowVoltageConduit) {
-				long takerStored = tile.getCapability(EnergyCapabilities.CAPABILITY_HOLDER, side).getStoredPower();
+				long takerStored = tile.getCapability(Capabilities.CAPABILITY_HOLDER, side).getStoredPower();
 				if (this.container.getStoredPower() > takerStored) {
-					this.container.takePower(tile.getCapability(EnergyCapabilities.CAPABILITY_CONSUMER, side).givePower(Math.min(50, (this.container.getStoredPower() + takerStored)/2 - takerStored), false), false);
+					this.container.takePower(tile.getCapability(Capabilities.CAPABILITY_CONSUMER, side).givePower(Math.min(50, (this.container.getStoredPower() + takerStored)/2 - takerStored), false), false);
 				}
 			} else 
 			//Use this algorithm to give power to adjacent blocks
-			if (tile != null && tile.hasCapability(EnergyCapabilities.CAPABILITY_CONSUMER, side)) {
-				long takerStored = tile.getCapability(EnergyCapabilities.CAPABILITY_HOLDER, side).getStoredPower();
-				long takerCapacity = tile.getCapability(EnergyCapabilities.CAPABILITY_HOLDER, side).getCapacity();
+			if (tile != null && tile.hasCapability(Capabilities.CAPABILITY_CONSUMER, side)) {
+				long takerStored = tile.getCapability(Capabilities.CAPABILITY_HOLDER, side).getStoredPower();
+				long takerCapacity = tile.getCapability(Capabilities.CAPABILITY_HOLDER, side).getCapacity();
 				if (this.container.getStoredPower() > takerStored) {
-					this.container.takePower(tile.getCapability(EnergyCapabilities.CAPABILITY_CONSUMER, side).givePower(Math.min(50, takerCapacity-takerStored), false), false);
+					this.container.takePower(tile.getCapability(Capabilities.CAPABILITY_CONSUMER, side).givePower(Math.min(50, takerCapacity-takerStored), false), false);
 				}
 			}
 		}
