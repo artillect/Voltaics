@@ -35,6 +35,8 @@ public class RegistryManager {
 	public static Block voltaicPile, lowVoltageConduit, heatingCoil, copperOre, zincOre, heatingChamber;
 	
 	public static void registerAll(){
+		GameRegistry.registerWorldGenerator(new DefaultWorldGen(), 1);
+		
 		//register items
 		items.add(voltmeter = new ItemVoltmeter());
 		items.add(plateCopper = new ItemBase("plateCopper", true));
