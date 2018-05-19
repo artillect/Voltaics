@@ -27,11 +27,8 @@ public class BlockHeatingChamber extends BlockTEBase {
 	//Open Heating Chamber gui when right-clicked
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (!player.isSneaking()) {
-			if (!world.isRemote) {
-					player.openGui(Voltaics.instance, GuiHandler.HEATINGCHAMBER, world, pos.getX(), pos.getY(), pos.getZ());
-				}
-			return true;
+		if (!world.isRemote) {
+			player.openGui(Voltaics.instance, GuiHandler.HEATINGCHAMBER, world, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
 	}

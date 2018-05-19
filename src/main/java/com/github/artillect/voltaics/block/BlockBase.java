@@ -25,8 +25,6 @@ public class BlockBase extends Block implements IModeledBlock {
 		if (addToTab) {
 			setCreativeTab(Voltaics.creativeTab);
 		}
-		GameRegistry.register(this);
-        GameRegistry.register(itemBlock = (new ItemBlock(this).setRegistryName(this.getRegistryName() + "inventory")));
     }
 	
 	//Setting and checking opacity and solidness

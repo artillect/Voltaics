@@ -1,6 +1,6 @@
 package com.github.artillect.voltaics.client;
 
-import com.github.artillect.voltaics.RegistryManager;
+import com.github.artillect.voltaics.ModBlocks;
 import com.github.artillect.voltaics.Voltaics;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -13,6 +13,6 @@ public class VoltaicsTab extends CreativeTabs{
 	
 	@Override
 	public ItemStack getTabIconItem() {
-		return new ItemStack(RegistryManager.voltmeter);
+		return new ItemStack(ModBlocks.VOLTAIC_PILE);
 	}
 }

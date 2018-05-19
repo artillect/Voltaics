@@ -133,4 +133,16 @@ public class BlockLowVoltageConduit extends BlockTEBase implements IModeledBlock
     public TileEntity createNewTileEntity(World worldIn, int meta) {
     	return new TileEntityLowVoltageConduit();
     }
+    
+	@Override
+	@Deprecated
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
+	}
+	
+	@Override
+	@Deprecated
+	public boolean isFullCube(IBlockState state) {
+		return false;
+	}
 }

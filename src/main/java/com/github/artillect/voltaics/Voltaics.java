@@ -29,7 +29,7 @@ public class Voltaics {
 
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
-		RegistryManager.initR(); //initialize recipes
+		//RegistryManager.initR(); //initialize recipes
 	}
 
 	@Mod.EventHandler
