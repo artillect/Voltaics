@@ -83,6 +83,7 @@ public class BlockLowVoltageConduit extends BlockTEBase implements IModeledBlock
 
 	@Override
 	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+		((TileEntityLowVoltageConduit)world.getTileEntity(pos)).updateNeighbors(world);
 		for (EnumFacing facing: EnumFacing.VALUES) {
 			if (world.getTileEntity(pos.offset(facing)) instanceof TileEntityLowVoltageConduit) {
 				((TileEntityLowVoltageConduit)world.getTileEntity(pos.offset(facing))).updateNeighbors(world);
@@ -116,12 +117,12 @@ public class BlockLowVoltageConduit extends BlockTEBase implements IModeledBlock
                 .withProperty(DOWN,  Boolean.valueOf(this.canConnectTo(worldIn, pos.down(), EnumFacing.DOWN)));
     }
     
-    public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing direction) {
+    public boolean canConnectTo(IBlockAccess worldIn, BlockPos pos, EnumFacing facing) {
         TileEntity te = worldIn.getTileEntity(pos);
         if (te == null) {
         	return false;
         }
-        return (te instanceof TileEntityLowVoltageConduit) || (te.hasCapability(Capabilities.CAPABILITY_HOLDER, direction.getOpposite()));
+        return (te instanceof TileEntityLowVoltageConduit) || (te.hasCapability(Capabilities.CAPABILITY_PRODUCER, facing.getOpposite()) || (te.hasCapability(Capabilities.CAPABILITY_CONSUMER, facing.getOpposite())));
     }
     
     @Override
