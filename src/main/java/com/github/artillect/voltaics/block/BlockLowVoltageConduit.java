@@ -80,66 +80,22 @@ public class BlockLowVoltageConduit extends BlockTEBase implements IModeledBlock
 		}
 	}
 	
-	/*@Override
-	public void neighborChanged(IBlockState state, World world, BlockPos pos, Block block) {
-		if (world.getTileEntity(pos) != null) {
-			((TileEntityLowVoltageConduit)world.getTileEntity(pos)).updateNeighbors(world);
-			world.notifyBlockUpdate(pos, state, world.getBlockState(pos), 3);
-		}
-	}*/
-	
-	/*@Override
-	public void onBlockAdded(World world, BlockPos pos, IBlockState state) {
-		if (world.getTileEntity(pos) != null) {
-			((TileEntityLowVoltageConduit)world.getTileEntity(pos)).updateNeighbors(world);
-		}
-	}*/
-   
 
 	@Override
 	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
-		if (world.getTileEntity(pos) instanceof TileEntityLowVoltageConduit) {
-			((TileEntityLowVoltageConduit)world.getTileEntity(pos)).updateNeighbors(world);
-		}
-		if (world.getTileEntity(pos.up()) instanceof TileEntityLowVoltageConduit) {
-			((TileEntityLowVoltageConduit)world.getTileEntity(pos.up())).updateNeighbors(world);
-		}
-		if (world.getTileEntity(pos.down()) instanceof TileEntityLowVoltageConduit) {
-			((TileEntityLowVoltageConduit)world.getTileEntity(pos.down())).updateNeighbors(world);
-		}
-		if (world.getTileEntity(pos.north()) instanceof TileEntityLowVoltageConduit) {
-			((TileEntityLowVoltageConduit)world.getTileEntity(pos.north())).updateNeighbors(world);
-		}
-		if (world.getTileEntity(pos.south()) instanceof TileEntityLowVoltageConduit) {
-			((TileEntityLowVoltageConduit)world.getTileEntity(pos.south())).updateNeighbors(world);
-		}
-		if (world.getTileEntity(pos.west()) instanceof TileEntityLowVoltageConduit) {
-			((TileEntityLowVoltageConduit)world.getTileEntity(pos.west())).updateNeighbors(world);
-		}
-		if (world.getTileEntity(pos.east()) instanceof TileEntityLowVoltageConduit) {
-			((TileEntityLowVoltageConduit)world.getTileEntity(pos.east())).updateNeighbors(world);
+		for (EnumFacing facing: EnumFacing.VALUES) {
+			if (world.getTileEntity(pos.offset(facing)) instanceof TileEntityLowVoltageConduit) {
+				((TileEntityLowVoltageConduit)world.getTileEntity(pos.offset(facing))).updateNeighbors(world);
+			}
 		}
 	}
 	
 	@Override
 	public void onBlockHarvested(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
-		if (world.getTileEntity(pos.up()) instanceof TileEntityLowVoltageConduit) {
-			((TileEntityLowVoltageConduit)world.getTileEntity(pos.up())).updateNeighbors(world);
-		}
-		if (world.getTileEntity(pos.down()) instanceof TileEntityLowVoltageConduit) {
-			((TileEntityLowVoltageConduit)world.getTileEntity(pos.down())).updateNeighbors(world);
-		}
-		if (world.getTileEntity(pos.north()) instanceof TileEntityLowVoltageConduit) {
-			((TileEntityLowVoltageConduit)world.getTileEntity(pos.north())).updateNeighbors(world);
-		}
-		if (world.getTileEntity(pos.south()) instanceof TileEntityLowVoltageConduit) {
-			((TileEntityLowVoltageConduit)world.getTileEntity(pos.south())).updateNeighbors(world);
-		}
-		if (world.getTileEntity(pos.west()) instanceof TileEntityLowVoltageConduit) {
-			((TileEntityLowVoltageConduit)world.getTileEntity(pos.west())).updateNeighbors(world);
-		}
-		if (world.getTileEntity(pos.east()) instanceof TileEntityLowVoltageConduit) {
-			((TileEntityLowVoltageConduit)world.getTileEntity(pos.east())).updateNeighbors(world);
+		for (EnumFacing facing: EnumFacing.VALUES) {
+			if (world.getTileEntity(pos.offset(facing)) instanceof TileEntityLowVoltageConduit) {
+				((TileEntityLowVoltageConduit)world.getTileEntity(pos.offset(facing))).updateNeighbors(world);
+			}
 		}
 	}
 	

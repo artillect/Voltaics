@@ -225,7 +225,7 @@ public class BaseEnergyContainer implements IEnergyConsumer, IEnergyProducer, IE
     }
     
     @Override
-    public double giveHeat (double heat, boolean simulated) {
+    public double addHeat (double heat, boolean simulated) {
         final double acceptedHeat = heat;
         
         if (!simulated)
@@ -233,13 +233,4 @@ public class BaseEnergyContainer implements IEnergyConsumer, IEnergyProducer, IE
             
         return acceptedHeat;
     }
-    
-	@Override
-	public double takeHeat(double lostDegrees, boolean simulated) {
-		final double takenHeat = lostDegrees;
-		
-		if (!simulated)
-			this.temperature -= takenHeat;
-		return takenHeat;
-	}
 }

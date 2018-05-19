@@ -71,8 +71,8 @@ public class TileEntityHeatingChamber extends TileEntity implements ITickable {
 			if (tile != null && tile.hasCapability(Capabilities.CAPABILITY_HEAT,side)) {
 				double takenHeat = 7.9*(tile.getCapability(Capabilities.CAPABILITY_HEAT, side.getOpposite()).getTemperature()-this.container.getTemperature());
 				double takenDegrees = takenHeat/4600;
-				tile.getCapability(Capabilities.CAPABILITY_HEAT, side).takeHeat(takenDegrees, false);
-				this.container.giveHeat(takenDegrees, false);
+				tile.getCapability(Capabilities.CAPABILITY_HEAT, side).addHeat(-takenDegrees, false);
+				this.container.addHeat(takenDegrees, false);
 			}
 		}
 	}

@@ -60,7 +60,7 @@ public class TileEntityHeatingCoil extends TileEntity implements ITickable {
     	//TODO: Balance resistance change based on temperature so it hits a true maximum when heating while fully insulated
     	if (this.container.getStoredPower() >= 50) {
     		this.container.takePower(50, false);
-    		this.container.giveHeat(1/(1+0.00393*(this.container.getTemperature()-20)), false);
+    		this.container.addHeat(1/(1+0.00393*(this.container.getTemperature()-20)), false);
     	}
 
     	//Lose heat to environment
@@ -68,8 +68,8 @@ public class TileEntityHeatingCoil extends TileEntity implements ITickable {
         for (final EnumFacing side : EnumFacing.values()) {
             final Block block = world.getBlockState(pos.offset(side)).getBlock();
             if (block == Blocks.AIR) {
-            	lostDegrees = 7.9*(this.getCapability(Capabilities.CAPABILITY_HEAT, side).getTemperature() - 20)/4600;
-            	this.container.takeHeat(lostDegrees, false);
+            	lostDegrees = -7.9*(this.getCapability(Capabilities.CAPABILITY_HEAT, side).getTemperature() - 20)/4600;
+            	this.container.addHeat(lostDegrees, false);
             }
         }
     }

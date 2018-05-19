@@ -53,7 +53,7 @@ public class BaseHeatMachine implements IHeat, INBTSerializable<NBTTagCompound> 
     }
     
     @Override
-    public double giveHeat (double heat, boolean simulated) {
+    public double addHeat (double heat, boolean simulated) {
         final double acceptedHeat = heat;
         
         if (!simulated)
@@ -61,15 +61,6 @@ public class BaseHeatMachine implements IHeat, INBTSerializable<NBTTagCompound> 
             
         return acceptedHeat;
     }
-    
-	@Override
-	public double takeHeat(double lostDegrees, boolean simulated) {
-		final double takenHeat = lostDegrees;
-		
-		if (!simulated)
-			this.temperature -= takenHeat;
-		return takenHeat;
-	}
     
     @Override
     public NBTTagCompound serializeNBT () {
