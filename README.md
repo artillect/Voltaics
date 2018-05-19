@@ -9,7 +9,7 @@ Instead of having traditional multiblock structures, each block in a structure w
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Authors
-* **Riley** (reygrschel) - *Lead Developer*
+* **Riley** (artillect) - *Lead Developer*
 * **Henry** (henrydane) - *Developer*
 * **MechWarrior99** - *Lead Artist*
 
