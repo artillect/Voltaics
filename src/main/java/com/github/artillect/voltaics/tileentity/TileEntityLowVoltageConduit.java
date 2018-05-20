@@ -46,7 +46,7 @@ public class TileEntityLowVoltageConduit extends TileEntity implements ITickable
 			return EnumConduitConnection.CONDUIT;
 		}
 		else if (world.getTileEntity(pos) != null){
-			if (world.getTileEntity(pos).hasCapability(Capabilities.CAPABILITY_HOLDER, side)){
+			if (world.getTileEntity(pos).hasCapability(Capabilities.CAPABILITY_CONSUMER, side) || world.getTileEntity(pos).hasCapability(Capabilities.CAPABILITY_PRODUCER, side)){
 				return EnumConduitConnection.BLOCK;
 			}
 		}
@@ -79,6 +79,7 @@ public class TileEntityLowVoltageConduit extends TileEntity implements ITickable
 		east = connectionFromInt(compound.getInteger("east"));
         this.container = new BaseEnergyContainer(compound.getCompoundTag("JouleContainer"));
 	}
+	
 	public void updateNeighbors(IBlockAccess world){
 		up = getConnection(world,getPos().up(),EnumFacing.DOWN);
 		down = getConnection(world,getPos().down(),EnumFacing.UP);
