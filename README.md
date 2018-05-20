@@ -1,4 +1,4 @@
-# Voltaics
+# Voltaics [![Discord](https://img.shields.io/discord/102860784329052160.svg?style=social)](https://discord.gg/bv6Uuee)
 
 This is a Minecraft mod based around creating and using power in more advanced ways. However, currently there are no ways of creating energy or using them, some of the blocks sorta store and sorta move it (this will change in the future).
 
