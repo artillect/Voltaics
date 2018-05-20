@@ -5,7 +5,6 @@ import com.github.artillect.voltaics.Voltaics;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemBase extends Item implements IModeledItem {
 	public ItemBase(String name, boolean addToTab){
