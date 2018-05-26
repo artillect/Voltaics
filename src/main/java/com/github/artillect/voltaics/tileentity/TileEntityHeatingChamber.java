@@ -17,7 +17,7 @@ public class TileEntityHeatingChamber extends TileEntity implements ITickable {
 	private BaseHeatMachine container;
 	
 	public TileEntityHeatingChamber() {
-		this.container = new BaseHeatMachine(0, 1000, 50, 50, 20, 1200);
+		this.container = new BaseHeatMachine(20, 1200);
 	}
 	
 	//Get and set NBT

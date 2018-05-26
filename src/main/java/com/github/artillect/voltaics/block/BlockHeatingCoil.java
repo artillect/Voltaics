@@ -15,7 +15,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockHeatingCoil extends BlockTEBase{
+public class BlockHeatingCoil extends BlockTEBase {
 	public static final PropertyDirection FACING = BlockHorizontal.FACING;
 	
 	public BlockHeatingCoil(Material material, String name, boolean addToTab) {

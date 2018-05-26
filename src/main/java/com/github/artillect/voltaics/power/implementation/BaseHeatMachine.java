@@ -24,7 +24,7 @@ public class BaseHeatMachine implements IHeat, INBTSerializable<NBTTagCompound> 
      * @param input The maximum rate of power that can be accepted at a time.
      * @param output The maximum rate of power that can be extracted at a time.
      */
-    public BaseHeatMachine(long power, long capacity, long input, long output, double temperature, double meltingPoint) {
+    public BaseHeatMachine(double temperature, double meltingPoint) {
         this.temperature = temperature;
         this.meltingPoint = meltingPoint;
     }

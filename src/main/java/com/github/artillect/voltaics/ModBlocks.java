@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.github.artillect.voltaics.block.BlockBase;
+import com.github.artillect.voltaics.block.BlockDistiller;
 import com.github.artillect.voltaics.block.BlockHeatingChamber;
 import com.github.artillect.voltaics.block.BlockHeatingCoil;
 import com.github.artillect.voltaics.block.BlockLowVoltageConduit;
@@ -40,6 +41,8 @@ public class ModBlocks {
 	
 	public static final BlockHeatingChamber HEATING_CHAMBER = new BlockHeatingChamber(Material.ROCK,"heatingChamber",true);
 	
+	public static final BlockDistiller DISTILLER = new BlockDistiller(Material.ROCK,"distiller",true);
+	
 	@Mod.EventBusSubscriber(modid = Voltaics.modId)
 	public static class RegistrationHandler {
 		public static final Set<ItemBlock> ITEM_BLOCKS = new HashSet<>();
@@ -54,7 +57,8 @@ public class ModBlocks {
 					LOW_VOLTAGE_CONDUIT,
 					COPPER_ORE,
 					ZINC_ORE,
-					HEATING_CHAMBER
+					HEATING_CHAMBER,
+					DISTILLER
 			};
 			
 			registry.registerAll(blocks);
@@ -68,7 +72,8 @@ public class ModBlocks {
 					new ItemBlock(HEATING_COIL),
 					new ItemBlock(COPPER_ORE),
 					new ItemBlock(ZINC_ORE),
-					new ItemBlock(HEATING_CHAMBER)
+					new ItemBlock(HEATING_CHAMBER),
+					new ItemBlock(DISTILLER)
 			};
 			
 			final IForgeRegistry<Item> registry = event.getRegistry();
@@ -91,6 +96,7 @@ public class ModBlocks {
 		registerTileEntity(TileEntityHeatingChamber.class,"heating_chamber");
 	}
 	
+	@SuppressWarnings("deprecation")
 	private static void registerTileEntity(final Class<? extends TileEntity> tileEntityClass, final String name) {
 		GameRegistry.registerTileEntity(tileEntityClass, Voltaics.modId + ":" + name);
 	}
