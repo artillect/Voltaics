@@ -1,8 +1,8 @@
 package com.github.artillect.voltaics.capability;
 
-import com.github.artillect.voltaics.power.IEnergyConsumer;
-import com.github.artillect.voltaics.power.IEnergyHolder;
-import com.github.artillect.voltaics.power.IEnergyProducer;
+import com.github.artillect.voltaics.power.IEnergySink;
+import com.github.artillect.voltaics.power.IEnergyPath;
+import com.github.artillect.voltaics.power.IEnergySource;
 import com.github.artillect.voltaics.power.IHeat;
 
 import net.minecraft.nbt.NBTBase;
@@ -13,14 +13,14 @@ import net.minecraftforge.common.capabilities.CapabilityInject;
 
 public class Capabilities {
     
-    @CapabilityInject(IEnergyConsumer.class)
-    public static Capability<IEnergyConsumer> CAPABILITY_CONSUMER = null;
+    @CapabilityInject(IEnergySink.class)
+    public static Capability<IEnergySink> CAPABILITY_SINK = null;
  
-    @CapabilityInject(IEnergyProducer.class)
-    public static Capability<IEnergyProducer> CAPABILITY_PRODUCER = null;
+    @CapabilityInject(IEnergySource.class)
+    public static Capability<IEnergySource> CAPABILITY_SOURCE = null;
     
-    @CapabilityInject(IEnergyHolder.class)
-    public static Capability<IEnergyHolder> CAPABILITY_HOLDER = null;
+    @CapabilityInject(IEnergyPath.class)
+    public static Capability<IEnergyPath> CAPABILITY_PATH = null;
     
     @CapabilityInject(IHeat.class)
     public static Capability<IHeat> CAPABILITY_HEAT = null;
@@ -40,44 +40,44 @@ public class Capabilities {
     }
     
     //Capability Magic
-    public static class CapabilityJouleConsumer<T extends IEnergyConsumer> implements IStorage<IEnergyConsumer> {
+    public static class CapabilityJouleSink<T extends IEnergySink> implements IStorage<IEnergySink> {
         
         @Override
-        public NBTBase writeNBT (Capability<IEnergyConsumer> capability, IEnergyConsumer instance, EnumFacing side) {
+        public NBTBase writeNBT (Capability<IEnergySink> capability, IEnergySink instance, EnumFacing side) {
             
             return null;
         }
         
         @Override
-        public void readNBT (Capability<IEnergyConsumer> capability, IEnergyConsumer instance, EnumFacing side, NBTBase nbt) {
+        public void readNBT (Capability<IEnergySink> capability, IEnergySink instance, EnumFacing side, NBTBase nbt) {
         
         }
     }
     
-    public static class CapabilityJouleProducer<T extends IEnergyProducer> implements IStorage<IEnergyProducer> {
+    public static class CapabilityJouleSOURCE<T extends IEnergySource> implements IStorage<IEnergySource> {
         
         @Override
-        public NBTBase writeNBT (Capability<IEnergyProducer> capability, IEnergyProducer instance, EnumFacing side) {
+        public NBTBase writeNBT (Capability<IEnergySource> capability, IEnergySource instance, EnumFacing side) {
             
             return null;
         }
         
         @Override
-        public void readNBT (Capability<IEnergyProducer> capability, IEnergyProducer instance, EnumFacing side, NBTBase nbt) {
+        public void readNBT (Capability<IEnergySource> capability, IEnergySource instance, EnumFacing side, NBTBase nbt) {
         
         }
     }
     
-    public static class CapabilityJouleHolder<T extends IEnergyHolder> implements IStorage<IEnergyHolder> {
+    public static class CapabilityJoulePath<T extends IEnergyPath> implements IStorage<IEnergyPath> {
         
         @Override
-        public NBTBase writeNBT (Capability<IEnergyHolder> capability, IEnergyHolder instance, EnumFacing side) {
+        public NBTBase writeNBT (Capability<IEnergyPath> capability, IEnergyPath instance, EnumFacing side) {
             
             return null;
         }
         
         @Override
-        public void readNBT (Capability<IEnergyHolder> capability, IEnergyHolder instance, EnumFacing side, NBTBase nbt) {
+        public void readNBT (Capability<IEnergyPath> capability, IEnergyPath instance, EnumFacing side, NBTBase nbt) {
         
         }
     }

@@ -1,7 +1,10 @@
 package com.github.artillect.voltaics.item;
 
+import java.util.HashMap;
+
 import com.github.artillect.voltaics.capability.Capabilities;
-import com.github.artillect.voltaics.power.IEnergyHolder;
+import com.github.artillect.voltaics.power.IEnergyPath;
+import com.github.artillect.voltaics.power.IEnergySource;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -25,14 +28,25 @@ public class ItemVoltmeter extends ItemBase {
 		TileEntity te = worldIn.getTileEntity(pos);
 		if (te == null) return EnumActionResult.FAIL;
 
-		if (!te.hasCapability(Capabilities.CAPABILITY_HOLDER, facing)) return EnumActionResult.FAIL;
+		/*if (te.hasCapability(Capabilities.CAPABILITY_SOURCE, facing)) {
+			IEnergySource energyBuffer = te.getCapability(Capabilities.CAPABILITY_SOURCE, facing);
+			
+			double storedEnergy = energyBuffer.getStoredPower();
+			double maxStoredEnergy = energyBuffer.getMaxPower();		
+			double voltage = energyBuffer.getVoltage();
+			player.sendMessage(new TextComponentString("Stored Energy: "+storedEnergy+" Therms"));
+			player.sendMessage(new TextComponentString("Max Energy Storage: "+maxStoredEnergy+" Therms"));
+			player.sendMessage(new TextComponentString("Current Voltage: "+voltage+" V"));
+	
+			return EnumActionResult.SUCCESS;
+		} else*/ if (te.hasCapability(Capabilities.CAPABILITY_PATH, facing)) {
+			IEnergyPath energyBuffer = te.getCapability(Capabilities.CAPABILITY_PATH, facing);
+			double voltage = energyBuffer.getVoltage();
+			HashMap<TileEntity, EnumFacing> voltageSourceList = energyBuffer.getVoltageSourceList();
+			player.sendMessage(new TextComponentString("Current Voltage: "+voltage+" V"));
+			player.sendMessage(new TextComponentString("Voltage Sources: "+voltageSourceList));
+			return EnumActionResult.SUCCESS;
 
-		IEnergyHolder energyBuffer = te.getCapability(Capabilities.CAPABILITY_HOLDER, facing);
-		
-		double storedEnergy = energyBuffer.getStoredPower();
-		double maxStoredEnergy = energyBuffer.getCapacity();		
-		player.sendMessage(new TextComponentString("Stored Energy: "+storedEnergy+" Therms"));
-		player.sendMessage(new TextComponentString("Max Energy Storage: "+maxStoredEnergy+" Therms"));
-		return EnumActionResult.SUCCESS;
+		} else return EnumActionResult.FAIL;
 	}
 }

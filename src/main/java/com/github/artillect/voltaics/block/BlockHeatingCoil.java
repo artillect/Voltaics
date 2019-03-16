@@ -1,9 +1,6 @@
 package com.github.artillect.voltaics.block;
 
-import com.github.artillect.voltaics.tileentity.TileEntityHeatingCoil;
-
 import net.minecraft.block.BlockHorizontal;
-//import com.artillect.voltaics.tileentity.TileEntityInductor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
@@ -44,8 +41,8 @@ public class BlockHeatingCoil extends BlockTEBase {
     	return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
     
-	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		return new TileEntityHeatingCoil();
-	}
+	/*
+	 * @Override public TileEntity createNewTileEntity(World worldIn, int meta) {
+	 * return new TileEntityHeatingCoil(); }
+	 */
 }

@@ -1,9 +1,6 @@
 package com.github.artillect.voltaics.block;
 
-import com.github.artillect.voltaics.GuiHandler;
 import com.github.artillect.voltaics.Voltaics;
-import com.github.artillect.voltaics.tileentity.TileEntityHeatingChamber;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,16 +16,16 @@ public class BlockHeatingChamber extends BlockTEBase {
 		super(material, name, addToTab);
 	}
 
-	@Override
-	public TileEntity createNewTileEntity(World worldIn, int meta) {
-		return new TileEntityHeatingChamber();
-	}
+	/*
+	 * @Override public TileEntity createNewTileEntity(World worldIn, int meta) {
+	 * return new TileEntityHeatingChamber(); }
+	 */
 	
 	//Open Heating Chamber gui when right-clicked
 	@Override
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (!world.isRemote) {
-			player.openGui(Voltaics.instance, GuiHandler.HEATINGCHAMBER, world, pos.getX(), pos.getY(), pos.getZ());
+			//player.openGui(Voltaics.instance, GuiHandler.HEATINGCHAMBER, world, pos.getX(), pos.getY(), pos.getZ());
 		}
 		return true;
 	}

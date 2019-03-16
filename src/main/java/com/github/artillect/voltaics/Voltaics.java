@@ -24,7 +24,7 @@ public class Voltaics {
 	public void preInit(FMLPreInitializationEvent event) {
 		System.out.println(name + " has begun loading.");
 		proxy.preInit(event);
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+		// NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 	}
 
 	@Mod.EventHandler

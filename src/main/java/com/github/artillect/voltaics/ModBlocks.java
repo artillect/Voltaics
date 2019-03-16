@@ -9,8 +9,6 @@ import com.github.artillect.voltaics.block.BlockHeatingChamber;
 import com.github.artillect.voltaics.block.BlockHeatingCoil;
 import com.github.artillect.voltaics.block.BlockLowVoltageConduit;
 import com.github.artillect.voltaics.block.BlockVoltaicPile;
-import com.github.artillect.voltaics.tileentity.TileEntityHeatingChamber;
-import com.github.artillect.voltaics.tileentity.TileEntityHeatingCoil;
 import com.github.artillect.voltaics.tileentity.TileEntityLowVoltageConduit;
 import com.github.artillect.voltaics.tileentity.TileEntityVoltaicPile;
 import com.google.common.base.Preconditions;
@@ -91,9 +89,9 @@ public class ModBlocks {
 	
 	private static void registerTileEntities() {
 		registerTileEntity(TileEntityVoltaicPile.class,"voltaic_pile");
-		registerTileEntity(TileEntityHeatingCoil.class,"heating_coil");
+		// registerTileEntity(TileEntityHeatingCoil.class,"heating_coil");
 		registerTileEntity(TileEntityLowVoltageConduit.class,"low_voltage_conduit");
-		registerTileEntity(TileEntityHeatingChamber.class,"heating_chamber");
+		// registerTileEntity(TileEntityHeatingChamber.class,"heating_chamber");
 	}
 	
 	@SuppressWarnings("deprecation")

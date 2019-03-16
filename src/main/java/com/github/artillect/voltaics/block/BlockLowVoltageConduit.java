@@ -122,7 +122,7 @@ public class BlockLowVoltageConduit extends BlockTEBase implements IModeledBlock
         if (te == null) {
         	return false;
         }
-        return (te instanceof TileEntityLowVoltageConduit) || (te.hasCapability(Capabilities.CAPABILITY_PRODUCER, facing.getOpposite()) || (te.hasCapability(Capabilities.CAPABILITY_CONSUMER, facing.getOpposite())));
+        return (te instanceof TileEntityLowVoltageConduit) || (te.hasCapability(Capabilities.CAPABILITY_SOURCE, facing.getOpposite()));
     }
     
     @Override
