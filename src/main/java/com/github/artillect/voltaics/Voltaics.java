@@ -1,43 +1,49 @@
 package com.github.artillect.voltaics;
 
-import com.github.artillect.voltaics.client.VoltaicsTab;
-import com.github.artillect.voltaics.proxy.CommonProxy;
+import com.github.artillect.voltaics.debug.ForgeLoggerTweaker;
 
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.Level;
 
-@Mod(modid = Voltaics.modId, name = Voltaics.name, version = Voltaics.version, acceptedMinecraftVersions = "[1.12]")
+
+@Mod(Voltaics.modId)
 public class Voltaics {
 
+	// initialize some variables containing information about the mod
 	public static final String modId = "voltaics";
 	public static final String name = "Voltaics";
 	public static final String version = "0.0.1";
-
-	@Mod.Instance(modId)
-	public static Voltaics instance;
-
-	@Mod.EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		System.out.println(name + " has begun loading.");
-		proxy.preInit(event);
-		// NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
-	}
-
-	@Mod.EventHandler
-	public void init(FMLInitializationEvent event) {
-		//RegistryManager.initR(); //initialize recipes
-	}
-
-	@Mod.EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
-
+	
+	// get event bus for registration events
+	public static IEventBus MOD_EVENT_BUS;
+	
+	
+	// do registry things
+	public Voltaics() {
+		final boolean HIDE_CONSOLE_NOISE = false;
+		if (HIDE_CONSOLE_NOISE) {
+			ForgeLoggerTweaker.setMinimumLevel(Level.WARN);
+			ForgeLoggerTweaker.applyLoggerFilter();
+		}
+		
+		MOD_EVENT_BUS = FMLJavaModLoadingContext.get().getModEventBus();
+		
+		registerCommonEvents();
+		DistExecutor.runWhenOn(Dist.CLIENT, () -> Voltaics::registerClientOnlyEvents);
 	}
 	
-	@SidedProxy(serverSide = "com.github.artillect.voltaics.proxy.CommonProxy", clientSide = "com.github.artillect.voltaics.proxy.ClientProxy")
-	public static CommonProxy proxy;
-	public static final VoltaicsTab creativeTab = new VoltaicsTab();
+	
+	// register things that are server-side
+	public static void registerCommonEvents() {
+		
+	}
+	
+	// register client-side things
+	public static void registerClientOnlyEvents() {
+		
+	}
 }

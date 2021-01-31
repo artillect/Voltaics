@@ -1,5 +1,5 @@
-package com.github.artillect.voltaics.item;
-
-public interface IModeledItem {
-	public void initModel();
-}
+//package com.github.artillect.voltaics.item;
+//
+//public interface IModeledItem {
+//	public void initModel();
+//}
