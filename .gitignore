@@ -1,48 +1,25 @@
 # eclipse
-
 bin
-
 *.launch
-
 .settings
-
 .metadata
-
 .classpath
-
 .project
 
-
-
 # idea
-
 out
-
 *.ipr
-
 *.iws
-
 *.iml
-
 .idea
 
-
-
 # gradle
-
 build
-
 .gradle
-gradle
 
 # other
-gradle
 eclipse
-crash-reports
-logs
-saves
-config
 run
- 
-*.txt
-*.json
+
+# Files from Forge MDK
+forge*changelog.txt
